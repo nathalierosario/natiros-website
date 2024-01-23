@@ -1,0 +1,31 @@
+:root {
+  background-color: #1E1D1F;
+  color: #E5D0CC;
+}
+
+body {
+  font-family: 'Roboto Mono', monospace;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  background-color: #1E1D1F;
+  
+}
+
+.pattern-cell-btn {
+  font-size: 0.8rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  white-space: normal;
+  width: 3.75rem;
+  height: 3.75rem;
+}
+
+.pattern-bingo-letter {
+  font-size: 1.2rem;
+}
+
+.btn {
+  --bs-btn-border-radius: 0;
+}
