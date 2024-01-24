@@ -7,8 +7,11 @@ body {
   font-family: 'Roboto Mono', monospace;
   font-weight: 400;
   -webkit-font-smoothing: antialiased;
-  background-color: #1E1D1F;
-  
+  background-color: white;
+}
+
+.pattern-bingo-letter {
+  font-size: 1.2rem;
 }
 
 .pattern-cell-btn {
@@ -20,10 +23,6 @@ body {
   white-space: normal;
   width: 3.75rem;
   height: 3.75rem;
-}
-
-.pattern-bingo-letter {
-  font-size: 1.2rem;
 }
 
 .btn {
