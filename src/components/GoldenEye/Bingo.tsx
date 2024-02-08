@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -68,7 +68,7 @@ export default function Bingo({ togglePlayback, isPlaying }: BingoProps) {
   return (
     <Container data-bs-theme="dark" fluid className="text-center mt-3">
       <Row className="justify-content-center">
-        <Col md="auto" style={{}}>
+        <Col md="auto">
           <Pattern
             pattern={pattern}
             setPattern={setPattern}

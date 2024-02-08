@@ -28,15 +28,17 @@ export default function Instructions() {
 
   return (
     <>
-      <Button
-        onClick={() => setOpenForm(!openForm)}
-        aria-controls="instruction-form"
-        aria-expanded={openForm}
-        style={{ backgroundColor: "transparent", borderColor: "transparent" }}
-        title="instructions"
-      >
-        <BsChevronDown />
-      </Button>
+      <div>
+        <Button
+          onClick={() => setOpenForm(!openForm)}
+          aria-controls="instruction-form"
+          aria-expanded={openForm}
+          style={{ backgroundColor: "transparent", borderColor: "transparent" }}
+          title="instructions"
+        >
+          <BsChevronDown />
+        </Button>
+      </div>
 
       <Collapse in={openForm}>
         <div id="collapse-form">
@@ -50,6 +52,7 @@ export default function Instructions() {
                     value={instruction}
                     onChange={handleInstructionChange}
                     autoComplete="off"
+                    size="sm"
                     style={{ backgroundColor: "transparent" }}
                   />
                 </Form.Group>
@@ -72,9 +75,15 @@ export default function Instructions() {
         </div>
       </Collapse>
 
-      <ListGroup variant="flush">
+      <ListGroup variant="flush" className="d-inline-flex" style={{}}>
         {confirmedInstructions.map((instruction, index) => (
-          <ListGroup.Item key={index}>{instruction}</ListGroup.Item>
+          <ListGroup.Item
+            key={index}
+            className="text-wrap instruction-list-item"
+            style={{ backgroundColor: "transparent" }}
+          >
+            {instruction}
+          </ListGroup.Item>
         ))}
       </ListGroup>
     </>
