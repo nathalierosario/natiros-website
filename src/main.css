@@ -7,7 +7,8 @@ body {
   font-family: 'Roboto Mono', monospace;
   font-weight: 400;
   -webkit-font-smoothing: antialiased;
-  background-color: white;
+  background-color: #1E1D1F;
+  color: #fff;
 }
 
 .pattern-bingo-letter {
@@ -23,8 +24,66 @@ body {
   white-space: normal;
   width: 3.75rem;
   height: 3.75rem;
+  --bs-btn-border-radius: 0;
 }
 
-.btn {
-  --bs-btn-border-radius: 0;
+.btn-primary {
+  --bs-btn-color: #fff;
+  --bs-btn-bg: #AD0DFD;
+  /* 1 */
+  --bs-btn-border-color: #AD0DFD;
+  /* 1 */
+  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-bg: #920BD5;
+  /* 2 */
+  --bs-btn-hover-border-color: #8C0ACD;
+  /* 3 */
+  --bs-btn-focus-shadow-rgb: 185, 48, 253;
+  /* 5 */
+  --bs-btn-active-color: #fff;
+  --bs-btn-active-bg: #8C0ACD;
+  /* 3 */
+  --bs-btn-active-border-color: #810ABD;
+  /* 4 */
+  --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  --bs-btn-disabled-color: #fff;
+  --bs-btn-disabled-bg: #AD0DFD;
+  /* 1 */
+  --bs-btn-disabled-border-color: #AD0DFD;
+  /* 1 */
+}
+
+.display-board-letter {
+  font-size: 2rem;
+}
+
+.display-board-row {
+  border-bottom: 1px solid #000;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1.5); /* Slightly larger than normal */
+    text-shadow: 0 0 8px #ff0022; /* Adding a glowing effect */
+  }
+
+  50% {
+    transform: scale(2.5); /* Significantly larger for emphasis */
+    text-shadow: 0 0 10px #ff0022; /* Intensify the glowing effect */
+  }
+}
+
+.display-board-num {
+  font-size: 1.6rem;
+  color: #2F2D2F;
+  transition: all 0.3s ease;
+}
+
+.display-board-num.current {
+  color: #ff0022;
+  animation: pulse 2s infinite ease-in-out;
+}
+
+.display-board-num.called {
+  color: #CECACE;
 }

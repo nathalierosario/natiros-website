@@ -1,11 +1,19 @@
-import { useState } from "react";
-
-export default function NumberGenerator() {
-  const [bingoNum, setBingoNum] = useState(0);
-  const [calledNums, setCalledNums] = useState<number[]>([]);
-  const bingoLetters = ["B", "I", "N", "G", "O"];
-
-  console.log(calledNums.length);
-
-  return <h1>hi</h1>;
+type RandomNumberProps = {
+  availableNums: number[];
+  setCurrentBingo: React.Dispatch<React.SetStateAction<number>>;
+  setCalledNumbers: React.Dispatch<React.SetStateAction<number[]>>;
+  setAvailableNums: React.Dispatch<React.SetStateAction<number[]>>;
+};
+export default function generateRandomNumber({
+  availableNums,
+  setCurrentBingo,
+  setCalledNumbers,
+  setAvailableNums,
+}: RandomNumberProps) {
+  if (availableNums.length > 0) {
+    const randomNumber = availableNums[0];
+    setCurrentBingo(randomNumber);
+    setCalledNumbers((prev) => [...prev, randomNumber]);
+    setAvailableNums((prev) => prev.slice(1));
+  }
 }
