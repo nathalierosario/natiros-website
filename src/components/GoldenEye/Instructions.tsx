@@ -33,6 +33,7 @@ export default function Instructions() {
         aria-controls="instruction-form"
         aria-expanded={openForm}
         style={{ backgroundColor: "transparent", borderColor: "transparent" }}
+        title="instructions"
       >
         <BsChevronDown />
       </Button>

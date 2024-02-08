@@ -3,7 +3,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import { BingoPattern } from "./BingoTypes";
-import { useState } from "react";
+// import { useState } from "react";
 
 type PatternProps = {
   pattern: BingoPattern;
@@ -11,7 +11,6 @@ type PatternProps = {
   dontCallLetters: string[];
   setDontCallLetters: React.Dispatch<React.SetStateAction<string[]>>;
   patternConfirmed: boolean;
-  onConfirm: () => void;
 };
 
 export default function Pattern({
@@ -20,12 +19,11 @@ export default function Pattern({
   dontCallLetters,
   setDontCallLetters,
   patternConfirmed,
-  onConfirm,
 }: PatternProps) {
-  const [isPatternConfirmed, setIsPatternConfirmed] = useState(false);
+  // const [isPatternConfirmed, setIsPatternConfirmed] = useState(false);
 
   const clickPattern = (letter: keyof BingoPattern, index: number) => {
-    if (!isPatternConfirmed) {
+    if (!patternConfirmed) {
       setPattern((prevPattern) => {
         const updatedCells = [...prevPattern[letter]];
         updatedCells[index] = !updatedCells[index];
@@ -64,7 +62,7 @@ export default function Pattern({
                     onClick={() =>
                       clickPattern(key as keyof BingoPattern, index)
                     }
-                    variant={isClicked ? "danger" : "outline-light"}
+                    variant={isClicked ? "light" : "outline-light"}
                     key={key + index}
                     className="pattern-cell-btn"
                     disabled={patternConfirmed}

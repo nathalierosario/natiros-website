@@ -1,16 +1,22 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import { BingoPattern } from "./GoldenEye/BingoTypes";
-import { generateAvailableNumbers } from "./GoldenEye/AvailableNums";
-import generateRandomNumber from "./GoldenEye/NumberGenerator";
-import Pattern from "./GoldenEye/Pattern";
-import BingoBall from "./GoldenEye/BingoBall";
-import DisplayBoard from "./GoldenEye/DisplayBoard";
-import Instructions from "./GoldenEye/Instructions";
+import { BingoPattern } from "./BingoTypes";
+import { generateAvailableNumbers } from "./AvailableNums";
+import generateRandomNumber from "./NumberGenerator";
+import Pattern from "./Pattern";
+import BingoBall from "./BingoBall";
+import DisplayBoard from "./DisplayBoard";
+import Instructions from "./Instructions";
+import Playback from "./Playback";
 
-export default function Bingo() {
+interface BingoProps {
+  togglePlayback: () => void;
+  isPlaying: boolean;
+}
+
+export default function Bingo({ togglePlayback, isPlaying }: BingoProps) {
   const initialPattern: BingoPattern = {
     B: Array(5).fill(false),
     I: Array(5).fill(false),
@@ -60,7 +66,7 @@ export default function Bingo() {
   };
 
   return (
-    <Container data-bs-theme="dark" fluid className="text-center" style={{}}>
+    <Container data-bs-theme="dark" fluid className="text-center mt-3">
       <Row className="justify-content-center">
         <Col md="auto" style={{}}>
           <Pattern
@@ -69,7 +75,6 @@ export default function Bingo() {
             dontCallLetters={dontCallLetters}
             setDontCallLetters={setDontCallLetters}
             patternConfirmed={patternConfirmed}
-            onConfirm={getBingoNumber}
           />
 
           <Col className="mt-3">
@@ -86,6 +91,11 @@ export default function Bingo() {
             calledNumbers={calledNumbers}
             currentBingo={currentBingo}
           />
+        </Col>
+      </Row>
+      <Row className="">
+        <Col md="auto">
+          <Playback togglePlayback={togglePlayback} isPlaying={isPlaying} />
         </Col>
       </Row>
     </Container>

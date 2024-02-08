@@ -1,7 +1,7 @@
-import Bingo from "./components/Bingo";
+import GoldenEyeEnt from "./components/GoldenEyeEnt";
 
 function App() {
-  return <Bingo />;
+  return <GoldenEyeEnt />;
 }
 
 export default App;

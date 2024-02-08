@@ -11,6 +11,12 @@ body {
   color: #fff;
 }
 
+.ge-tab-bar {
+  font-size: 1.2rem;
+  /* --bs-nav-link-color: red;
+  --bs-nav-link-hover-color: blue; */
+}
+
 .pattern-bingo-letter {
   font-size: 1.2rem;
 }
@@ -22,8 +28,8 @@ body {
   align-items: center;
   text-align: center;
   white-space: normal;
-  width: 3.75rem;
-  height: 3.75rem;
+  width: 3.5rem;
+  height: 3.5rem;
   --bs-btn-border-radius: 0;
 }
 
@@ -53,8 +59,22 @@ body {
   /* 1 */
 }
 
+.bingo-ball {
+  font-size: 1.8rem;
+}
+
 .display-board-letter {
   font-size: 2rem;
+  font-weight: bold;
+  text-shadow:
+    0 0 5px #ff1493,
+    0 0 10px #ff1493,
+    0 0 15px #ff1493,
+    0 0 20px #ff1493,
+    0 0 35px #ff1493,
+    0 0 40px #ff1493,
+    0 0 50px #ff1493,
+    0 0 75px #ff1493;
 }
 
 .display-board-row {
@@ -62,16 +82,49 @@ body {
 }
 
 @keyframes pulse {
-  0%, 100% {
-    transform: scale(1.5); /* Slightly larger than normal */
-    text-shadow: 0 0 8px #ff0022; /* Adding a glowing effect */
+
+  0%,
+  100% {
+    transform: scale(1.5);
+    /* Slightly larger than normal */
+    text-shadow: 0 0 8px #ff0022;
+    /* Adding a glowing effect */
   }
 
   50% {
-    transform: scale(2.5); /* Significantly larger for emphasis */
-    text-shadow: 0 0 10px #ff0022; /* Intensify the glowing effect */
+    transform: scale(2.5);
+    /* Significantly larger for emphasis */
+    text-shadow: 0 0 10px #ff0022;
+    /* Intensify the glowing effect */
   }
 }
+
+@keyframes neonGlowHover {
+
+  0%,
+  100% {
+    text-shadow:
+      0 0 5px #ff1493,
+      0 0 10px #ff1493,
+      0 0 20px #ff1493,
+      0 0 30px rgba(255, 20, 147, 0.5),
+      0 0 40px rgba(255, 20, 147, 0.4),
+      0 0 50px rgba(255, 20, 147, 0.3);
+    transform: scale(2.5);
+  }
+
+  50% {
+    text-shadow:
+      0 0 10px #ff1493,
+      0 0 20px #ff1493,
+      0 0 30px #ff1493,
+      0 0 40px rgba(255, 20, 147, 0.7),
+      0 0 50px rgba(255, 20, 147, 0.6),
+      0 0 60px rgba(255, 20, 147, 0.5);
+    transform: scale(3);
+  }
+}
+
 
 .display-board-num {
   font-size: 1.6rem;
@@ -80,8 +133,10 @@ body {
 }
 
 .display-board-num.current {
-  color: #ff0022;
-  animation: pulse 2s infinite ease-in-out;
+  /* color: #ff4081; */
+  color: #fff;
+  font-weight: bold;
+  animation: neonGlowHover 2s infinite ease-in-out;
 }
 
 .display-board-num.called {
