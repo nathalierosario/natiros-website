@@ -43,6 +43,11 @@ export default function Bingo({ togglePlayback, isPlaying }: BingoProps) {
 
   const [patternConfirmed, setPatternConfirmed] = useState(false);
 
+  //Instructions list set by the user
+  const [confirmedInstructions, setConfirmedInstructions] = useState<string[]>(
+    []
+  );
+
   const getBingoNumber = () => {
     if (!patternConfirmed) {
       setPatternConfirmed(true);
@@ -66,9 +71,9 @@ export default function Bingo({ togglePlayback, isPlaying }: BingoProps) {
   };
 
   return (
-    <Container data-bs-theme="dark" fluid className="text-center mt-3">
+    <Container data-bs-theme="dark" fluid className="text-center">
       <Row className="justify-content-center">
-        <Col md="auto">
+        <Col md="auto" style={{ }}>
           <Pattern
             pattern={pattern}
             setPattern={setPattern}
@@ -78,7 +83,10 @@ export default function Bingo({ togglePlayback, isPlaying }: BingoProps) {
           />
 
           <Col className="mt-3">
-            <Instructions />
+            <Instructions
+              confirmedInstructions={confirmedInstructions}
+              setConfirmedInstructions={setConfirmedInstructions}
+            />
           </Col>
 
           <Col md="auto" className="mt-3" style={{}}>
@@ -86,7 +94,7 @@ export default function Bingo({ togglePlayback, isPlaying }: BingoProps) {
           </Col>
         </Col>
 
-        <Col>
+        <Col style={{}}>
           <DisplayBoard
             calledNumbers={calledNumbers}
             currentBingo={currentBingo}

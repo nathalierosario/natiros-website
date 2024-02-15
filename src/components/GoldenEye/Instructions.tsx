@@ -8,11 +8,13 @@ import { BsCheckLg } from "react-icons/bs";
 import { BsChevronDown } from "react-icons/bs";
 import Collapse from "react-bootstrap/Collapse";
 
-export default function Instructions() {
+type InstructionsProps = {
+  confirmedInstructions: string[];
+  setConfirmedInstructions: React.Dispatch<React.SetStateAction<string[]>>;
+}
+
+export default function Instructions({confirmedInstructions, setConfirmedInstructions}: InstructionsProps) {
   const [instruction, setInstruction] = useState<string>("");
-  const [confirmedInstructions, setConfirmedInstructions] = useState<string[]>(
-    []
-  );
   const [openForm, setOpenForm] = useState(false);
 
   const handleInstructionChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -75,7 +77,7 @@ export default function Instructions() {
         </div>
       </Collapse>
 
-      <ListGroup variant="flush" className="d-inline-flex" style={{}}>
+      {/* <ListGroup horizontal className="d-inline-flex" style={{}}>
         {confirmedInstructions.map((instruction, index) => (
           <ListGroup.Item
             key={index}
@@ -85,7 +87,7 @@ export default function Instructions() {
             {instruction}
           </ListGroup.Item>
         ))}
-      </ListGroup>
+      </ListGroup> */}
     </>
   );
 }

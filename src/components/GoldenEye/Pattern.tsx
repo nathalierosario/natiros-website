@@ -3,7 +3,6 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import { BingoPattern } from "./BingoTypes";
-// import { useState } from "react";
 
 type PatternProps = {
   pattern: BingoPattern;

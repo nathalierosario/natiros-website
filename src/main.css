@@ -11,12 +11,6 @@ body {
   color: #fff;
 }
 
-.ge-tab-bar {
-  font-size: 1.2rem;
-  /* --bs-nav-link-color: red;
-  --bs-nav-link-hover-color: blue; */
-}
-
 .pattern-bingo-letter {
   font-size: 1.2rem;
 }
@@ -31,11 +25,6 @@ body {
   width: 3.2rem;
   height: 3.2rem;
   --bs-btn-border-radius: 0;
-}
-
-.instruction-list-item {
-  font-size: 2.9rem;
-  color: #E80E3A;
 }
 
 .btn-primary {
@@ -69,7 +58,7 @@ body {
 }
 
 .display-board-letter {
-  font-size: 2rem;
+  font-size: 2.5rem;
   font-weight: bold;
   text-shadow:
     0 0 5px #ff1493,
@@ -132,7 +121,7 @@ body {
 
 
 .display-board-num {
-  font-size: 1.6rem;
+  font-size: 2rem;
   color: #2F2D2F;
   transition: all 0.3s ease;
 }

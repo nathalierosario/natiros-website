@@ -38,7 +38,7 @@ export default function DisplayBoard({
 
   return (
     <Container className="text-center">
-      <Row>
+      <Row className="g-0">
         <Col>
           <Image fluid src={croppedAB}></Image>
         </Col>
@@ -49,7 +49,7 @@ export default function DisplayBoard({
           {bingoNumbers[letter as keyof BingoNumbers].map((number) => (
             <Col
               key={number}
-              className={`display-board-num ${getNumClassName(number)} my-3`}
+              className={`display-board-num ${getNumClassName(number)}`}
             >
               {number}
             </Col>

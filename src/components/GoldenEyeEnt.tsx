@@ -25,7 +25,8 @@ export default function GoldenEyeEnt() {
 
   return (
     <Tabs
-      className="justify-content-end ge-tab-bar"
+      variant="pills"
+      className="justify-content-center ge-tab-bar mt-2"
       data-bs-theme="dark"
       activeKey={key}
       onSelect={(k) => setKey(k || "bingo")}
