@@ -151,3 +151,8 @@ body {
 .display-board-num.called {
   color: #CECACE;
 }
+
+.ge-logo {
+  font-family: 'Dollie Script Personal Use', sans-serif;
+  color: var(--bingo-blue)
+}

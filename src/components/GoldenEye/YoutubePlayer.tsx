@@ -29,6 +29,7 @@ export default function YoutubePlayer({
             listType: "playlist",
             list: playlistID,
           },
+
           events: {
             onReady: (event) => {
               setPlayer(event.target); // Update the parent component's state with the new player instance
@@ -57,5 +58,11 @@ export default function YoutubePlayer({
     }
   }, [playlistID, player, setPlayer]);
 
-  return <div ref={playerRef}></div>;
+  return (
+    <div className="d-flex justify-content-center">
+      <div>
+        <div ref={playerRef} className="player-container"></div>
+      </div>
+    </div>
+  );
 }

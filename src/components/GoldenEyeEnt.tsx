@@ -2,13 +2,15 @@ import { useState } from "react";
 import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
 import Bingo from "./GoldenEye/Bingo";
-import GEHome from "./GoldenEye/GEHome";
+import GEHome from "./GoldenEye/Home";
 import backgroundImageHome from "./GoldenEye/images/adultbingohomepage.png";
+import backgroundImageDim from "./GoldenEye/images/adultbingohomepage-dim.png"
 
 export default function GoldenEyeEnt() {
   const [key, setKey] = useState("bingo");
   const [player, setPlayer] = useState<YT.Player | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [showVideo, setShowVideo] = useState(false);
   const playlistID = "PL1BxR11Ysr38El0FTUAraiFLxyYeHUhl6";
 
   const togglePlayback = () => {
@@ -39,13 +41,19 @@ export default function GoldenEyeEnt() {
         eventKey="home"
         title="home"
         style={{
-          backgroundImage: `url(${backgroundImageHome})`,
+          backgroundImage: `url(${!showVideo ? backgroundImageHome : backgroundImageDim})`,
           minHeight: "100vh",
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}
       >
-        <GEHome playlistID={playlistID} player={player} setPlayer={setPlayer} />
+        <GEHome
+          playlistID={playlistID}
+          player={player}
+          setPlayer={setPlayer}
+          showVideo={showVideo}
+          setShowVideo={setShowVideo}
+        />
       </Tab>
     </Tabs>
   );

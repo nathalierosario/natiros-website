@@ -85,7 +85,7 @@ export default function Pattern({
                     ? "light"
                     : "outline-turq"
                 }
-                className="w-100 h-100 d-flex justify-content-center align-items-center "
+                className="w-100 h-100 d-flex justify-content-center align-items-center square-button"
                 disabled={patternConfirmed}
                 onClick={() => clickPattern(rowIndex, colIndex)}
                 style={{ fontSize: "min(1vw, 1vh)" }}
