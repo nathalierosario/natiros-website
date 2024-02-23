@@ -3,6 +3,7 @@ import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
 import Bingo from "./GoldenEye/Bingo";
 import GEHome from "./GoldenEye/GEHome";
+import backgroundImageHome from "./GoldenEye/images/adultbingohomepage.png";
 
 export default function GoldenEyeEnt() {
   const [key, setKey] = useState("bingo");
@@ -34,7 +35,16 @@ export default function GoldenEyeEnt() {
       <Tab eventKey="bingo" title="bingo">
         <Bingo togglePlayback={togglePlayback} isPlaying={isPlaying} />
       </Tab>
-      <Tab eventKey="home" title="home">
+      <Tab
+        eventKey="home"
+        title="home"
+        style={{
+          backgroundImage: `url(${backgroundImageHome})`,
+          minHeight: "100vh",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+      >
         <GEHome playlistID={playlistID} player={player} setPlayer={setPlayer} />
       </Tab>
     </Tabs>

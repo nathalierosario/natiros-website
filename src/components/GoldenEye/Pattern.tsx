@@ -91,7 +91,7 @@ export default function Pattern({
                 style={{ fontSize: "min(1vw, 1vh)" }}
               >
                 {colIndex === 2 && rowIndex === 2 ? (
-                  <span style={{ padding: "5%" }}>FREE SPACE</span>
+                  <span>FREE SPACE</span>
                 ) : (
                   ""
                 )}

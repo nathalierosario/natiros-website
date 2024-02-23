@@ -19,7 +19,7 @@ export default function PreviousCalls({
       {patternConfirmed && (
         <>
           <div className="fs-3 prev-calls-text">previous calls</div>
-          <div className="d-flex justify-content-center flex-wrap">
+          <div className="d-flex justify-content-center flex-wrap border">
             {prevThreeCalled.map((number, index) => (
               <div
                 key={index}

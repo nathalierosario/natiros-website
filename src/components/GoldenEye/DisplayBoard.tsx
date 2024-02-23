@@ -39,13 +39,13 @@ export default function DisplayBoard({
   return (
     <Container className="text-center bg-secondary-subtle rounded">
       <Row>
-        <Col>
-          <Image fluid rounded src={croppedAB}></Image>
+        <Col className="p-0">
+          <Image fluid rounded className="rounded-bottom-0" src={croppedAB}></Image>
         </Col>
       </Row>
       {bingoLetters.map((letter) => (
-        <Row className="align-items-center display-board-row" key={letter}>
-          <Col className="display-board-letter">{letter}</Col>
+        <Row className="align-items-center my-2 display-board-row" key={letter}>
+          <Col className="fs-1 fw-bold display-board-letter">{letter}</Col>
           {bingoNumbers[letter as keyof BingoNumbers].map((number) => (
             <Col
               key={number}

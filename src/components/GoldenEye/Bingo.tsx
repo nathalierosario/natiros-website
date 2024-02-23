@@ -85,7 +85,7 @@ export default function Bingo({ togglePlayback, isPlaying }: BingoProps) {
   return (
     <Container data-bs-theme="dark" fluid className="text-center">
       <Row className="justify-content-center">
-        <Col md="3" style={{}}>
+        <Col md="3">
           <Pattern
             pattern={pattern}
             setPattern={setPattern}
