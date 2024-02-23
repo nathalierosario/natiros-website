@@ -2,6 +2,7 @@ import { useState } from "react";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import Button from "react-bootstrap/Button";
 import { BingoPattern } from "./BingoTypes";
 import { generateAvailableNumbers } from "./AvailableNums";
 import generateRandomNumber from "./NumberGenerator";
@@ -10,6 +11,7 @@ import BingoBall from "./BingoBall";
 import DisplayBoard from "./DisplayBoard";
 import Instructions from "./Instructions";
 import Playback from "./Playback";
+import PreviousCalls from "./PreviousCalls";
 
 interface BingoProps {
   togglePlayback: () => void;
@@ -70,10 +72,20 @@ export default function Bingo({ togglePlayback, isPlaying }: BingoProps) {
     }
   };
 
+  const resetBoard = () => {
+    setPattern(initialPattern);
+    setDontCallLetters(dontCall);
+    setCurrentBingo(0);
+    setCalledNumbers([]);
+    setAvailableNums([]);
+    setPatternConfirmed(false);
+    setConfirmedInstructions([]);
+  };
+
   return (
     <Container data-bs-theme="dark" fluid className="text-center">
       <Row className="justify-content-center">
-        <Col md="auto" style={{ }}>
+        <Col md="3" style={{}}>
           <Pattern
             pattern={pattern}
             setPattern={setPattern}
@@ -94,16 +106,24 @@ export default function Bingo({ togglePlayback, isPlaying }: BingoProps) {
           </Col>
         </Col>
 
-        <Col style={{}}>
+        <Col>
           <DisplayBoard
             calledNumbers={calledNumbers}
             currentBingo={currentBingo}
           />
+          <Button onClick={resetBoard}>clear board</Button>
         </Col>
       </Row>
       <Row className="">
         <Col md="auto">
           <Playback togglePlayback={togglePlayback} isPlaying={isPlaying} />
+        </Col>
+        <Col>
+          <PreviousCalls
+            calledNumbers={calledNumbers}
+            currentBingo={currentBingo}
+            patternConfirmed={patternConfirmed}
+          />
         </Col>
       </Row>
     </Container>

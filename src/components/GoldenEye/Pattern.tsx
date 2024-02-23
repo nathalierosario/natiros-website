@@ -21,10 +21,16 @@ export default function Pattern({
 }: PatternProps) {
   // const [isPatternConfirmed, setIsPatternConfirmed] = useState(false);
 
-  const clickPattern = (letter: keyof BingoPattern, index: number) => {
+  // Col is each letter in BINGO
+  // Row is each index per letter in this column
+  const clickPattern = (row: number, col: number) => {
     if (!patternConfirmed) {
+      // Convert row and col to corresponding letter and index
+      const letter = "BINGO".charAt(col);
+      const index = row;
+
       setPattern((prevPattern) => {
-        const updatedCells = [...prevPattern[letter]];
+        const updatedCells = [...prevPattern[letter as keyof BingoPattern]];
         updatedCells[index] = !updatedCells[index];
 
         const updatedPattern = {
@@ -40,46 +46,60 @@ export default function Pattern({
   };
 
   const updateDontCall = (updatedPattern: BingoPattern) => {
-    const bingoLetters = Object.keys(updatedPattern) as (keyof BingoPattern)[];
-    const updatedDontCall = bingoLetters.filter((l) =>
-      updatedPattern[l].every((val) => !val)
-    );
-
+    const updatedDontCall = "BINGO"
+      .split("")
+      .filter((letter) =>
+        updatedPattern[letter as keyof BingoPattern].every((cell) => !cell)
+      );
     setDontCallLetters(updatedDontCall.length === 5 ? [] : updatedDontCall);
   };
 
   return (
-    <Container className="text-center pattern-board d-inline-flex w-auto flex-column">
-      <Row className="justify-content-center g-0">
-        {Object.keys(pattern).map((key) => (
-          <Col key={key} className="flex-grow-0 pattern-bingo-letter">
-            {key}
-            {pattern[key as keyof BingoPattern].map((isClicked, index) => (
-              <Row key={index}>
-                <Col className="flex-grow-0">
-                  <Button
-                    onClick={() =>
-                      clickPattern(key as keyof BingoPattern, index)
-                    }
-                    variant={isClicked ? "light" : "outline-light"}
-                    key={key + index}
-                    className="pattern-cell-btn"
-                    disabled={patternConfirmed}
-                  >
-                    {key === "N" && index === 2 ? "FREE SPACE" : ""}
-                  </Button>
-                </Col>
-              </Row>
-            ))}
+    <Container className="pattern-board">
+      <Row className="g-1 justify-content-center ">
+        {"BINGO".split("").map((letter, index) => (
+          <Col
+            key={index}
+            className="p-1"
+            xs={2}
+            style={{ fontSize: "min(2vw, 2vh)", fontWeight: "bold" }}
+          >
+            <div className="text-center">{letter}</div>
           </Col>
         ))}
       </Row>
-
-      {/* <div className="mt-3 d-block">
-        <Button onClick={handleConfirmClick} disabled={isPatternConfirmed}>
-          confirm pattern
-        </Button>
-      </div> */}
+      {Array.from({ length: 5 }, (_, rowIndex) => (
+        <Row key={rowIndex} className="g-1 justify-content-center">
+          {Array.from({ length: 5 }, (_, colIndex) => (
+            <Col
+              key={`${rowIndex}-${colIndex}`}
+              className="p-1"
+              xs={2}
+              style={{ aspectRatio: "1/1" }}
+            >
+              <Button
+                variant={
+                  pattern["BINGO".charAt(colIndex) as keyof BingoPattern][
+                    rowIndex
+                  ]
+                    ? "light"
+                    : "outline-turq"
+                }
+                className="w-100 h-100 d-flex justify-content-center align-items-center "
+                disabled={patternConfirmed}
+                onClick={() => clickPattern(rowIndex, colIndex)}
+                style={{ fontSize: "min(1vw, 1vh)" }}
+              >
+                {colIndex === 2 && rowIndex === 2 ? (
+                  <span style={{ padding: "5%" }}>FREE SPACE</span>
+                ) : (
+                  ""
+                )}
+              </Button>
+            </Col>
+          ))}
+        </Row>
+      ))}
     </Container>
   );
 }

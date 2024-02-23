@@ -37,10 +37,10 @@ export default function DisplayBoard({
   };
 
   return (
-    <Container className="text-center">
-      <Row className="g-0">
+    <Container className="text-center bg-secondary-subtle rounded">
+      <Row>
         <Col>
-          <Image fluid src={croppedAB}></Image>
+          <Image fluid rounded src={croppedAB}></Image>
         </Col>
       </Row>
       {bingoLetters.map((letter) => (
@@ -50,6 +50,7 @@ export default function DisplayBoard({
             <Col
               key={number}
               className={`display-board-num ${getNumClassName(number)}`}
+              style={{ fontSize: "min(3vw, 3vh)" }}
             >
               {number}
             </Col>

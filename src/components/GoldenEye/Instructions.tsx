@@ -11,9 +11,12 @@ import Collapse from "react-bootstrap/Collapse";
 type InstructionsProps = {
   confirmedInstructions: string[];
   setConfirmedInstructions: React.Dispatch<React.SetStateAction<string[]>>;
-}
+};
 
-export default function Instructions({confirmedInstructions, setConfirmedInstructions}: InstructionsProps) {
+export default function Instructions({
+  confirmedInstructions,
+  setConfirmedInstructions,
+}: InstructionsProps) {
   const [instruction, setInstruction] = useState<string>("");
   const [openForm, setOpenForm] = useState(false);
 
@@ -28,6 +31,11 @@ export default function Instructions({confirmedInstructions, setConfirmedInstruc
     setInstruction("");
   };
 
+  const iconStyle = {
+    transform: openForm ? "rotate(180deg)" : "rotate(0deg)",
+    transition: "transform 0.3s",
+  };
+
   return (
     <>
       <div>
@@ -38,14 +46,14 @@ export default function Instructions({confirmedInstructions, setConfirmedInstruc
           style={{ backgroundColor: "transparent", borderColor: "transparent" }}
           title="instructions"
         >
-          <BsChevronDown />
+          <BsChevronDown style={iconStyle} />
         </Button>
       </div>
 
       <Collapse in={openForm}>
         <div id="collapse-form">
           <Form onSubmit={handleConfirmedInstructions}>
-            <Row className="g-0 px-3">
+            <Row className="d-inline-flex align-items-center instruction-container">
               <Col>
                 <Form.Group controlId="instructionInput">
                   <Form.Control
@@ -55,7 +63,7 @@ export default function Instructions({confirmedInstructions, setConfirmedInstruc
                     onChange={handleInstructionChange}
                     autoComplete="off"
                     size="sm"
-                    style={{ backgroundColor: "transparent" }}
+                    style={{ backgroundColor: "transparent", borderColor: "transparent" }}
                   />
                 </Form.Group>
               </Col>
@@ -69,7 +77,7 @@ export default function Instructions({confirmedInstructions, setConfirmedInstruc
                     borderColor: "transparent",
                   }}
                 >
-                  <BsCheckLg size={"1em"} />
+                  <BsCheckLg />
                 </Button>
               </Col>
             </Row>
@@ -77,7 +85,7 @@ export default function Instructions({confirmedInstructions, setConfirmedInstruc
         </div>
       </Collapse>
 
-      {/* <ListGroup horizontal className="d-inline-flex" style={{}}>
+      <ListGroup className="d-inline-flex" style={{}}>
         {confirmedInstructions.map((instruction, index) => (
           <ListGroup.Item
             key={index}
@@ -87,7 +95,7 @@ export default function Instructions({confirmedInstructions, setConfirmedInstruc
             {instruction}
           </ListGroup.Item>
         ))}
-      </ListGroup> */}
+      </ListGroup>
     </>
   );
 }
