@@ -33,7 +33,7 @@ body {
   --bs-btn-hover-color: #fff;
   --bs-btn-hover-bg: var(--bingo-blue);
   --bs-btn-hover-border-color: var(--bingo-blue);
-  --bs-btn-focus-shadow-rgb: 220,53,69;
+  --bs-btn-focus-shadow-rgb: 220, 53, 69;
   --bs-btn-active-color: #fff;
   --bs-btn-active-bg: var(--bingo-blue);
   --bs-btn-active-border-color: var(--bingo-blue);
@@ -150,6 +150,11 @@ body {
 
 .display-board-num.called {
   color: #CECACE;
+}
+
+.nav-logo {
+  font-family: 'Dollie Script Personal Use', sans-serif;
+  color: var(--bingo-blue)
 }
 
 .ge-logo {

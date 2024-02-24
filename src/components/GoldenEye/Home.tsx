@@ -2,6 +2,7 @@ import { useState } from "react";
 import YoutubePlayer from "./YoutubePlayer";
 import Button from "react-bootstrap/Button";
 import Collapse from "react-bootstrap/Collapse";
+import { SiYoutubemusic } from "react-icons/si";
 
 interface GEHomeProps {
   playlistID: string;
@@ -20,15 +21,15 @@ export default function GEHome({
 }: GEHomeProps) {
   return (
     <div>
-      <div className="ge-logo" style={{ fontSize: "min(8vw, 8vh)" }}>
+      {/* <div className="ge-logo" style={{ fontSize: "min(8vw, 8vh)" }}>
         GoldenEye Entertainment
-      </div>
+      </div> */}
       <Button
         onClick={() => setShowVideo(!showVideo)}
         aria-controls="show-video-home"
         aria-expanded={showVideo}
       >
-        hello
+        <SiYoutubemusic style={{backgroundColor: "transparent"}} />
       </Button>
       <Collapse in={showVideo}>
         <div>
