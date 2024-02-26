@@ -1,6 +1,4 @@
 import { useState } from "react";
-import Tab from "react-bootstrap/Tab";
-import Tabs from "react-bootstrap/Tabs";
 import Nav from "react-bootstrap/Nav";
 import Bingo from "./GoldenEye/Bingo";
 import GEHome from "./GoldenEye/Home";
