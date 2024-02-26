@@ -7,7 +7,6 @@ import { BingoPattern } from "./BingoTypes";
 type PatternProps = {
   pattern: BingoPattern;
   setPattern: React.Dispatch<React.SetStateAction<BingoPattern>>;
-  dontCallLetters: string[];
   setDontCallLetters: React.Dispatch<React.SetStateAction<string[]>>;
   patternConfirmed: boolean;
 };
@@ -15,7 +14,6 @@ type PatternProps = {
 export default function Pattern({
   pattern,
   setPattern,
-  dontCallLetters,
   setDontCallLetters,
   patternConfirmed,
 }: PatternProps) {

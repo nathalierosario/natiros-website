@@ -89,7 +89,6 @@ export default function Bingo({ togglePlayback, isPlaying }: BingoProps) {
           <Pattern
             pattern={pattern}
             setPattern={setPattern}
-            dontCallLetters={dontCallLetters}
             setDontCallLetters={setDontCallLetters}
             patternConfirmed={patternConfirmed}
           />

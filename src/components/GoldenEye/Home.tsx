@@ -1,4 +1,3 @@
-import { useState } from "react";
 import YoutubePlayer from "./YoutubePlayer";
 import Button from "react-bootstrap/Button";
 import Collapse from "react-bootstrap/Collapse";

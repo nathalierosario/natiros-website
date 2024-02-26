@@ -24,7 +24,7 @@ export default function YoutubePlayer({
     const initializePlayer = () => {
       if (playerRef.current && !player) {
         // Check if the div exists and no player has been initialized yet
-        const newPlayer = new YT.Player(playerRef.current, {
+        new YT.Player(playerRef.current, {
           playerVars: {
             listType: "playlist",
             list: playlistID,
