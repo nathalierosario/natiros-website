@@ -1,7 +1,15 @@
+import { PlayerProvider } from "./components/GoldenEye/PlayerContext";
+import { LayoutProvider } from "./components/GoldenEye/LayoutContext";
 import GoldenEyeEnt from "./components/GoldenEyeEnt";
 
 function App() {
-  return <GoldenEyeEnt />;
+  return (
+    <PlayerProvider>
+      <LayoutProvider>
+        <GoldenEyeEnt />
+      </LayoutProvider>
+    </PlayerProvider>
+  );
 }
 
 export default App;

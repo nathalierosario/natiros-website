@@ -38,25 +38,59 @@ export default function DisplayBoard({
 
   return (
     <Container className="text-center bg-secondary-subtle rounded">
+      {/* Image row, responsive for all screen sizes */}
       <Row>
         <Col className="p-0">
-          <Image fluid rounded className="rounded-bottom-0" src={croppedAB}></Image>
+          <Image
+            fluid
+            rounded
+            className="rounded-bottom-0"
+            src={croppedAB}
+          ></Image>
         </Col>
       </Row>
-      {bingoLetters.map((letter) => (
-        <Row className="align-items-center my-2 display-board-row" key={letter}>
-          <Col className="fs-1 fw-bold display-board-letter">{letter}</Col>
-          {bingoNumbers[letter as keyof BingoNumbers].map((number) => (
-            <Col
-              key={number}
-              className={`display-board-num ${getNumClassName(number)}`}
-              style={{ fontSize: "min(3vw, 3vh)" }}
-            >
-              {number}
-            </Col>
-          ))}
-        </Row>
-      ))}
+
+      {/* Dislay board for letters and numbers */}
+      <Row className="display-board flex-row flex-md-column">
+        {bingoLetters.map((letter) => (
+          <Col
+            className="display-container d-flex flex-column flex-md-row"
+            key={letter}
+          >
+            <div className="display-letter">{letter}</div>
+            <div className="display-numbers d-flex flex-column flex-md-row flex-grow-1">
+              {bingoNumbers[letter as keyof BingoNumbers].map((number) => (
+                <div
+                  key={number}
+                  className={`flex-grow-1 display-num ${getNumClassName(
+                    number
+                  )}`}
+                >
+                  {number}
+                </div>
+              ))}
+            </div>
+          </Col>
+        ))}
+      </Row>
+
+      {/* <Row className="flex-column">
+        {bingoLetters.map((letter) => (
+          <Col className="d-flex" key={letter}>
+            <div className="">{letter}</div>
+            <div className="d-flex flex-row">
+              {bingoNumbers[letter as keyof BingoNumbers].map((number) => (
+                <div
+                  key={number}
+                  className={`${getNumClassName(number)}`}
+                >
+                  {number}
+                </div>
+              ))}
+            </div>
+          </Col>
+        ))}
+      </Row> */}
     </Container>
   );
 }

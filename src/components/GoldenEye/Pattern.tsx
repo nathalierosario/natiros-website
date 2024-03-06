@@ -54,39 +54,44 @@ export default function Pattern({
 
   return (
     <Container className="pattern-board">
-      <Row className="g-1 justify-content-center ">
+      <Row className="justify-content-center m-0 p-0 g-0">
         {"BINGO".split("").map((letter, index) => (
           <Col
             key={index}
-            className="p-1"
-            xs={2}
-            style={{ fontSize: "min(2vw, 2vh)", fontWeight: "bold" }}
+            style={{ fontSize: "max(1.2vw, 1.5vh)", fontWeight: "bold" }}
           >
             <div className="text-center">{letter}</div>
           </Col>
         ))}
       </Row>
       {Array.from({ length: 5 }, (_, rowIndex) => (
-        <Row key={rowIndex} className="g-1 justify-content-center">
+        <Row key={rowIndex} className="m-0 p-0 g-0 justify-content-center">
           {Array.from({ length: 5 }, (_, colIndex) => (
             <Col
               key={`${rowIndex}-${colIndex}`}
-              className="p-1"
-              xs={2}
-              style={{ aspectRatio: "1/1" }}
+              className="p-0 m-0 d-flex justify-content-center "
             >
               <Button
                 variant={
                   pattern["BINGO".charAt(colIndex) as keyof BingoPattern][
                     rowIndex
                   ]
-                    ? "light"
+                    ? "simple"
                     : "outline-turq"
                 }
-                className="w-100 h-100 d-flex justify-content-center align-items-center square-button"
+                className={`circle pattern-cell border-0 ${
+                  rowIndex === 0 ? "border-top" : ""
+                } ${
+                  colIndex === 0 ? "border-start" : ""
+                } border-end border-bottom`}
                 disabled={patternConfirmed}
                 onClick={() => clickPattern(rowIndex, colIndex)}
-                style={{ fontSize: "min(1vw, 1vh)" }}
+                style={{
+                  fontSize: "max(0.8vw, 0.8vh)",
+                  borderRadius: "0",
+                  width: "100%",
+                  minWidth: "20px"
+                }}
               >
                 {colIndex === 2 && rowIndex === 2 ? (
                   <span>FREE SPACE</span>

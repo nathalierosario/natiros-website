@@ -1,44 +1,45 @@
-import YoutubePlayer from "./YoutubePlayer";
 import Button from "react-bootstrap/Button";
-import Collapse from "react-bootstrap/Collapse";
-import { SiYoutubemusic } from "react-icons/si";
+import YoutubePlayer from "./YoutubePlayer";
+// import { useLayout } from "./LayoutContext";
+import React from "react";
+import { BsX } from "react-icons/bs";
 
 interface GEHomeProps {
   playlistID: string;
-  player: YT.Player | null;
-  setPlayer: React.Dispatch<React.SetStateAction<YT.Player | null>>;
   showVideo: boolean;
   setShowVideo: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export default function GEHome({
   playlistID,
-  player,
-  setPlayer,
   showVideo,
   setShowVideo,
 }: GEHomeProps) {
+  // const { navbarHeight } = useLayout();
+
+  const handleClose = () => {
+    setShowVideo(false);
+  };
   return (
-    <div>
-      {/* <div className="ge-logo" style={{ fontSize: "min(8vw, 8vh)" }}>
-        GoldenEye Entertainment
-      </div> */}
-      <Button
-        onClick={() => setShowVideo(!showVideo)}
-        aria-controls="show-video-home"
-        aria-expanded={showVideo}
+    <div
+      className={`modal-dupe ${showVideo ? "active" : ""}`}
+      // style={{ paddingTop: navbarHeight }}
+    >
+      <div
+        className="modal-content"
+        onClick={(e: React.MouseEvent<HTMLDivElement>) => e.stopPropagation()}
       >
-        <SiYoutubemusic style={{backgroundColor: "transparent"}} />
-      </Button>
-      <Collapse in={showVideo}>
-        <div>
-          <YoutubePlayer
-            playlistID={playlistID}
-            player={player}
-            setPlayer={setPlayer}
-          />
-        </div>
-      </Collapse>
+        <YoutubePlayer playlistID={playlistID} />
+        <Button
+          variant="glass"
+          className="align-self-center circle"
+          aria-label="Close"
+          onClick={handleClose}
+          style={{ width: "3%" }}
+        >
+          <BsX size={"2rem"} />
+        </Button>
+      </div>
     </div>
   );
 }

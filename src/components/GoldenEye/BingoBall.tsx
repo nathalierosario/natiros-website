@@ -12,8 +12,8 @@ export default function BingoBall({
 }: BingoBallProps) {
   return (
     <Button
-      className="rounded-circle bingo-ball"
-      style={{ width: "50%", aspectRatio: 1 / 1 }}
+      className="circle bingo-ball"
+      style={{ width: "70%" }}
       onClick={onClick}
     >
       {number > 0 ? (

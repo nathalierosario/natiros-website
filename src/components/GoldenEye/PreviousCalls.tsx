@@ -20,18 +20,18 @@ export default function PreviousCalls({
 
   const letterColors: LetterColors = {
     B: "#3D8095",
-    I: "#7B018C",
+    I: "#d2107e",
     N: "#C7062D",
     G: "#7B018C",
     O: "#FF4500",
   };
 
   return (
-    <div>
+    <div className="prev-calls-container">
       {patternConfirmed && (
         <>
-          <div className="fs-3 prev-calls-text">previous calls</div>
-          <div className="d-flex justify-content-center flex-wrap">
+          <span>previous calls</span>
+          <div className="d-flex justify-content-center align-items-center">
             {prevThreeCalled.map((number, index) => {
               const letter = getLetterForNumber(number);
               const bgColor = letterColors[letter]; // Determine the background color based on the letter
@@ -39,11 +39,10 @@ export default function PreviousCalls({
               return (
                 <div
                   key={index}
-                  className="d-flex flex-column align-items-center justify-content-center border rounded-circle fs-4 mx-1"
+                  className="d-flex circle align-items-center justify-content-center"
                   style={{
-                    width: "7%",
-                    aspectRatio: "1/1",
-                    backgroundColor: bgColor, // Apply the background color
+                    backgroundColor: bgColor,
+                    width: "max(10vw, 10vh)",
                   }}
                 >
                   <div>{letter}</div>

@@ -1,68 +1,77 @@
+import React, { useEffect, useRef } from "react";
+import { usePlayer } from "./PlayerContext";
+
 declare global {
   interface Window {
     onYouTubeIframeAPIReady: () => void;
   }
 }
 
-import { useEffect } from "react";
-import { useRef } from "react";
-
-interface YoutubePlayerProps {
-  playlistID: string;
-  player: YT.Player | null;
-  setPlayer: React.Dispatch<React.SetStateAction<YT.Player | null>>;
-}
-
-export default function YoutubePlayer({
-  playlistID,
-  player,
-  setPlayer,
-}: YoutubePlayerProps) {
-  const playerRef = useRef<HTMLDivElement>(null);
+const YoutubePlayer: React.FC<{ playlistID: string }> = ({ playlistID }) => {
+  const { playing } = usePlayer();
+  const playerRef = useRef<any>(null);
 
   useEffect(() => {
+    const scriptId = "youtube-iframe-api";
+
+    const loadYT = () => {
+      if (!document.getElementById(scriptId)) {
+        const tag = document.createElement("script");
+        tag.id = scriptId;
+        tag.src = "https://www.youtube.com/iframe_api";
+        const firstScriptTag = document.getElementsByTagName("script")[0];
+        if (firstScriptTag.parentNode) {
+          firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+        }
+      }
+    };
+
     const initializePlayer = () => {
-      if (playerRef.current && !player) {
-        // Check if the div exists and no player has been initialized yet
-        new YT.Player(playerRef.current, {
+      if (window.YT && window.YT.Player) {
+        playerRef.current = new window.YT.Player("player", {
           playerVars: {
             listType: "playlist",
             list: playlistID,
           },
-
           events: {
             onReady: (event) => {
-              setPlayer(event.target); // Update the parent component's state with the new player instance
+              event.target.setShuffle(true);
+              event.target.playVideoAt(0);
             },
-            // You can add more event handlers here
           },
         });
       }
     };
 
-    // Dynamically load the YouTube IFrame API script if it hasn't been loaded yet
-    if (!window.YT) {
-      // Check if the YT object is not present
-      const tag = document.createElement("script");
-      tag.src = "https://www.youtube.com/iframe_api";
-      const firstScriptTag = document.getElementsByTagName("script")[0];
-      if (firstScriptTag && firstScriptTag.parentNode) {
-        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-      }
-
-      // Define the global onYouTubeIframeAPIReady function that YouTube will call once the API script is loaded
+    if (!window["YT"]) {
+      loadYT();
       window.onYouTubeIframeAPIReady = initializePlayer;
-    } else if (!player) {
-      // If the API is already loaded but no player is initialized, initialize the player
+    } else {
       initializePlayer();
     }
-  }, [playlistID, player, setPlayer]);
+
+    return () => {
+      if (playerRef.current) {
+        playerRef.current.destroy();
+        // playerRef.current = null;
+      }
+      window.onYouTubeIframeAPIReady = () => {};
+    };
+  }, [playlistID]);
+
+  useEffect(() => {
+    if (playerRef.current) {
+      playing ? playerRef.current.playVideo() : playerRef.current.pauseVideo();
+    }
+  }, [playing]);
 
   return (
     <div className="d-flex justify-content-center">
-      <div>
-        <div ref={playerRef} className="player-container"></div>
+      <div className=" ratio ratio-16x9" style={{ width: "95%" }}>
+        <div id="player"></div>
       </div>
     </div>
   );
-}
+};
+
+export default YoutubePlayer;

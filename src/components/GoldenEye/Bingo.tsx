@@ -10,15 +10,10 @@ import Pattern from "./Pattern";
 import BingoBall from "./BingoBall";
 import DisplayBoard from "./DisplayBoard";
 import Instructions from "./Instructions";
-import Playback from "./Playback";
 import PreviousCalls from "./PreviousCalls";
+import { useLayout } from "./LayoutContext";
 
-interface BingoProps {
-  togglePlayback: () => void;
-  isPlaying: boolean;
-}
-
-export default function Bingo({ togglePlayback, isPlaying }: BingoProps) {
+export default function Bingo() {
   const initialPattern: BingoPattern = {
     B: Array(5).fill(false),
     I: Array(5).fill(false),
@@ -49,6 +44,9 @@ export default function Bingo({ togglePlayback, isPlaying }: BingoProps) {
   const [confirmedInstructions, setConfirmedInstructions] = useState<string[]>(
     []
   );
+
+  // Getting navbar height
+  const { navbarHeight } = useLayout();
 
   const getBingoNumber = () => {
     if (!patternConfirmed) {
@@ -83,15 +81,33 @@ export default function Bingo({ togglePlayback, isPlaying }: BingoProps) {
   };
 
   return (
-    <Container data-bs-theme="dark" fluid className="text-center">
-      <Row className="justify-content-center">
-        <Col md="3">
+    <Container
+      data-bs-theme="dark"
+      fluid
+      className="text-center"
+      style={{ paddingTop: navbarHeight }}
+    >
+      <Row className="justify-content-center g-0">
+        <Col xs={4} md={2}>
           <Pattern
             pattern={pattern}
             setPattern={setPattern}
             setDontCallLetters={setDontCallLetters}
             patternConfirmed={patternConfirmed}
           />
+          <Col>
+            <Button
+              size="sm"
+              variant="simple"
+              className="rounded"
+              style={{
+                borderColor: "transparent",
+              }}
+              onClick={resetBoard}
+            >
+              clear board
+            </Button>
+          </Col>
 
           <Col className="mt-3">
             <Instructions
@@ -100,23 +116,19 @@ export default function Bingo({ togglePlayback, isPlaying }: BingoProps) {
             />
           </Col>
 
-          <Col md="auto" className="mt-3" style={{}}>
+          <Col className="d-flex justify-content-center ">
             <BingoBall number={currentBingo} onClick={getBingoNumber} />
           </Col>
         </Col>
 
-        <Col>
+        <Col xs={8} md={10}>
           <DisplayBoard
             calledNumbers={calledNumbers}
             currentBingo={currentBingo}
           />
-          <Button onClick={resetBoard}>clear board</Button>
         </Col>
       </Row>
-      <Row className="">
-        <Col md="auto">
-          <Playback togglePlayback={togglePlayback} isPlaying={isPlaying} />
-        </Col>
+      <Row>
         <Col>
           <PreviousCalls
             calledNumbers={calledNumbers}
