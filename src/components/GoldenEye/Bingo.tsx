@@ -11,7 +11,7 @@ import BingoBall from "./BingoBall";
 import DisplayBoard from "./DisplayBoard";
 import Instructions from "./Instructions";
 import PreviousCalls from "./PreviousCalls";
-import { useLayout } from "./LayoutContext";
+// import { useLayout } from "./LayoutContext";
 
 export default function Bingo() {
   const initialPattern: BingoPattern = {
@@ -46,7 +46,7 @@ export default function Bingo() {
   );
 
   // Getting navbar height
-  const { navbarHeight } = useLayout();
+  // const { navbarHeight } = useLayout();
 
   const getBingoNumber = () => {
     if (!patternConfirmed) {
@@ -85,7 +85,7 @@ export default function Bingo() {
       data-bs-theme="dark"
       fluid
       className="text-center"
-      style={{ paddingTop: navbarHeight }}
+      // style={{ paddingTop: navbarHeight }}
     >
       <Row className="justify-content-center g-0">
         <Col xs={4} md={2}>

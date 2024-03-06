@@ -90,7 +90,7 @@ export default function Pattern({
                   fontSize: "max(0.8vw, 0.8vh)",
                   borderRadius: "0",
                   width: "100%",
-                  minWidth: "20px"
+                  minWidth: "10px"
                 }}
               >
                 {colIndex === 2 && rowIndex === 2 ? (

@@ -34,7 +34,10 @@ export default function GoldenEyeEnt() {
       <Nav
         ref={navbarRef}
         variant="underline"
-        className="position-fixed top-0 w-100 align-items-center ge-nav-bar"
+        // className="position-fixed top-0 w-100 align-items-center ge-nav-bar"
+        className={`align-items-center ge-nav-bar ${
+          key === "home" ? "position-fixed top-0 w-100" : "position-sticky "
+        }`}
         activeKey={key}
         onSelect={(selectedKey) => setKey(selectedKey || "bingo")}
       >
@@ -44,7 +47,7 @@ export default function GoldenEyeEnt() {
           </Nav.Link>
         </Nav.Item>
 
-        <div className="d-md-flex ms-auto">
+        <div className="d-none d-md-flex ms-auto">
           <Button
             title="toggle sound"
             variant="glass"
