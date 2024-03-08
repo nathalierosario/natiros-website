@@ -53,7 +53,7 @@ export default function Pattern({
   };
 
   return (
-    <Container className="pattern-board">
+    <Container fluid className="pattern-board p-0">
       <Row className="justify-content-center m-0 p-0 g-0">
         {"BINGO".split("").map((letter, index) => (
           <Col

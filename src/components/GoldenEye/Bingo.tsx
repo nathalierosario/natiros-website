@@ -11,6 +11,7 @@ import BingoBall from "./BingoBall";
 import DisplayBoard from "./DisplayBoard";
 import Instructions from "./Instructions";
 import PreviousCalls from "./PreviousCalls";
+import InstructionDisplay from "./InstructionDisplay";
 // import { useLayout } from "./LayoutContext";
 
 export default function Bingo() {
@@ -87,15 +88,22 @@ export default function Bingo() {
       className="text-center"
       // style={{ paddingTop: navbarHeight }}
     >
-      <Row className="justify-content-center g-0">
-        <Col xs={4} md={2}>
+      <Row className="justify-content-center g-3">
+        <Col xs={4} sm={3} md={2}>
           <Pattern
             pattern={pattern}
             setPattern={setPattern}
             setDontCallLetters={setDontCallLetters}
             patternConfirmed={patternConfirmed}
           />
-          <Col>
+
+          {/* Rows and cols for everything below pattern board */}
+          <div className="d-flex flex-column align-items-center justify-content-evenly gap-4">
+            <Instructions
+              confirmedInstructions={confirmedInstructions}
+              setConfirmedInstructions={setConfirmedInstructions}
+            />
+            <BingoBall number={currentBingo} onClick={getBingoNumber} />
             <Button
               size="sm"
               variant="simple"
@@ -107,27 +115,21 @@ export default function Bingo() {
             >
               clear board
             </Button>
-          </Col>
-
-          <Col className="mt-3">
-            <Instructions
-              confirmedInstructions={confirmedInstructions}
-              setConfirmedInstructions={setConfirmedInstructions}
-            />
-          </Col>
-
-          <Col className="d-flex justify-content-center ">
-            <BingoBall number={currentBingo} onClick={getBingoNumber} />
-          </Col>
+          </div>
         </Col>
 
-        <Col xs={8} md={10}>
+        <Col>
           <DisplayBoard
             calledNumbers={calledNumbers}
             currentBingo={currentBingo}
           />
+          <Col className="marquee-container">
+            <InstructionDisplay confirmedInstructions={confirmedInstructions} />
+          </Col>
         </Col>
       </Row>
+
+      {/* Previous calls container */}
       <Row>
         <Col>
           <PreviousCalls

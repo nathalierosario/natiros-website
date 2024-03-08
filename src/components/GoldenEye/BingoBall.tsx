@@ -19,6 +19,7 @@ export default function BingoBall({
       {number > 0 ? (
         <>
           <div>{getLetterForNumber(number)}</div>
+          <div>{"-"}</div>
           <div>{number}</div>
         </>
       ) : (

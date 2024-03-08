@@ -37,7 +37,7 @@ export default function DisplayBoard({
   };
 
   return (
-    <Container className="text-center bg-secondary-subtle rounded">
+    <Container fluid className="text-center bg-secondary-subtle rounded">
       {/* Image row, responsive for all screen sizes */}
       <Row>
         <Col className="p-0">

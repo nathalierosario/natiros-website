@@ -9,9 +9,10 @@
   --bingo-text-color: #e5d0cc;
   --bingo-gray: #534d4d;
   --glass: rgba(26, 26, 26, 0.3);
+  --glass-hover: rgba(255, 255, 255, 0.3);
   --white: #eceae5;
 
-  background-color: #101010;
+  background-color: var(--bingo-bg-color);
   color: var(--white);
 }
 
@@ -19,7 +20,7 @@ body {
   font-family: "Roboto Mono", monospace;
   font-weight: 400;
   -webkit-font-smoothing: antialiased;
-  background-color: #101010;
+  background-color: var(--bingo-bg-color);
   color: var(--white);
 }
 
@@ -45,7 +46,7 @@ body {
 
 .ge-nav-bar {
   background: linear-gradient(
-    0deg,
+    180deg,
     rgba(0, 0, 0, 0.78) 0,
     rgba(0, 0, 0, 0.687) 11.7%,
     rgba(0, 0, 0, 0.601) 21.8%,
@@ -96,6 +97,23 @@ body {
   display: none;
 }
 
+.sidebar {
+  position: fixed;
+  right: -100%;
+  top: 0;
+  height: 100%;
+  width: 20vw;
+  background-blend-mode: luminosity;
+  backdrop-filter: blur(30px);
+  transition: right 0.3s ease;
+  z-index: 2;
+}
+
+.sidebar.show {
+  right: 0;
+  width: 100%;
+}
+
 .modal-dupe {
   display: none;
   opacity: 0;
@@ -126,6 +144,14 @@ body {
 .btn-glass {
   /* background: rgba(225, 134, 229, 0.5); */
   background-color: var(--glass);
+  color: var(--white);
+  background-blend-mode: luminosity;
+  backdrop-filter: blur(30px);
+  transition: all 0.25s linear;
+}
+
+.btn-glass:hover {
+  background-color: var(--glass-hover);
   color: var(--white);
   background-blend-mode: luminosity;
   backdrop-filter: blur(30px);
@@ -189,9 +215,20 @@ body {
   border-color: var(--bingo-blue) !important;
 }
 
-.instruction-container {
-  border: 1px solid #495057;
-  border-radius: 0.25rem;
+.buttons-col {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.bingo-ball {
+  font-family: "Jetbrains Mono", monospace;
+  font-size: 2.8rem;
+}
+
+.modal-content {
+background-color: var(--bingo-gray);
 }
 
 .display-letter {
@@ -243,6 +280,26 @@ body {
 .display-num.called {
   color: #cecace;
   font-weight: 500;
+}
+
+@keyframes marquee {
+  0% { transform: translateX(100%); }
+  50% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+.instruction-display {
+  color: var(--bingo-red);
+  text-transform: uppercase;
+  font-size: 1.5rem;
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  animation: marquee 10s linear infinite;
+}
+
+.marquee-container {
+  overflow: hidden;
 }
 
 .prev-calls-container {

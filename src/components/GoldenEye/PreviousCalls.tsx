@@ -46,6 +46,7 @@ export default function PreviousCalls({
                   }}
                 >
                   <div>{letter}</div>
+                  <div>{"-"}</div>
                   <div>{number}</div>
                 </div>
               );

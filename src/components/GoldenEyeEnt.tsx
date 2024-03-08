@@ -6,8 +6,8 @@ import Button from "react-bootstrap/Button";
 import Bingo from "./GoldenEye/Bingo";
 import Home from "./GoldenEye/Home";
 import backgroundImageHome from "./GoldenEye/images/adultbingohomepage.png";
-import { BsPauseFill, BsPlayFill } from "react-icons/bs";
-import { MdOutlineTv } from "react-icons/md";
+import { BsPauseFill, BsPlayFill, BsX } from "react-icons/bs";
+import { MdOutlineTv, MdMenu } from "react-icons/md";
 
 export default function GoldenEyeEnt() {
   const [key, setKey] = useState("home");
@@ -29,25 +29,73 @@ export default function GoldenEyeEnt() {
     setKey("home");
   };
 
+  const [isSidebarVisible, setIsSidebarVisible] = useState(false);
+
   return (
     <>
+      {/* Sidebar contents for smaller screens */}
+      <div className={`d-flex flex-column align-items-center sidebar ${isSidebarVisible ? "show" : ""}`}>
+        <Button variant="glass circle" onClick={() => setIsSidebarVisible(false)}>
+          <BsX />
+        </Button>
+        <Nav.Link eventKey="home" onClick={() => setKey("home")}>
+          home
+        </Nav.Link>
+        <Nav.Link eventKey="bingo" onClick={() => setKey("bingo")}>
+          bingo
+        </Nav.Link>
+        <Button
+          title="toggle sound"
+          variant="glass"
+          className="circle yt-nav-btn"
+          onClick={togglePlay}
+        >
+          {!playing ? <BsPlayFill /> : <BsPauseFill />}
+        </Button>
+        <Button
+          title="show video"
+          variant="glass"
+          className="circle yt-nav-btn"
+          onClick={showVideoOnHome}
+        >
+          <MdOutlineTv />
+        </Button>
+      </div>
+
+
+      {/* Navbar */}
       <Nav
         ref={navbarRef}
         variant="underline"
         // className="position-fixed top-0 w-100 align-items-center ge-nav-bar"
-        className={`align-items-center ge-nav-bar ${
-          key === "home" ? "position-fixed top-0 w-100" : "position-sticky "
+        className={`align-items-center justify-content-between px-4 ge-nav-bar ${
+          key === "home" ? "position-fixed top-0 w-100" : "position-sticky bingo"
         }`}
         activeKey={key}
         onSelect={(selectedKey) => setKey(selectedKey || "bingo")}
       >
+        
+
+        {/* Navbar logo */}
         <Nav.Item>
           <Nav.Link disabled className="nav-logo pb-0">
             GoldenEye Entertainment
           </Nav.Link>
         </Nav.Item>
+        
+        
+        {/* Sidebar button to toggle on smaller screens */}
+        <Button
+          variant="glass circle"
+          className="sidebar-toggle d-md-none"
+          onClick={() => setIsSidebarVisible(!isSidebarVisible)}
+        >
+          <MdMenu />
+        </Button>
 
-        <div className="d-none d-md-flex ms-auto">
+
+        {/* Navbar Links */}
+        <div className="d-none d-md-flex">
           <Button
             title="toggle sound"
             variant="glass"
@@ -64,20 +112,20 @@ export default function GoldenEyeEnt() {
           >
             <MdOutlineTv />
           </Button>
+          <Nav.Item>
+            <Nav.Link eventKey="home" onClick={() => setKey("home")}>
+              home
+            </Nav.Link>
+          </Nav.Item>
+          <Nav.Item>
+            <Nav.Link eventKey="bingo" onClick={() => setKey("bingo")}>
+              bingo
+            </Nav.Link>
+          </Nav.Item>
         </div>
-
-        <Nav.Item>
-          <Nav.Link eventKey="home" onClick={() => setKey("home")}>
-            home
-          </Nav.Link>
-        </Nav.Item>
-        <Nav.Item>
-          <Nav.Link eventKey="bingo" onClick={() => setKey("bingo")}>
-            bingo
-          </Nav.Link>
-        </Nav.Item>
       </Nav>
 
+      {/* Actual tabs that display each page */}
       <div className={`tab-content ${key === "bingo" ? "d-block" : "d-none"}`}>
         <Bingo />
       </div>

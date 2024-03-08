@@ -1,12 +1,10 @@
 import { FormEvent, useState } from "react";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import ListGroup from "react-bootstrap/ListGroup";
+import Modal from "react-bootstrap/Modal";
+// import ListGroup from "react-bootstrap/ListGroup";
 import { BsCheckLg } from "react-icons/bs";
-import { BsChevronDown } from "react-icons/bs";
-import Collapse from "react-bootstrap/Collapse";
+import { MdOutlineMessage } from "react-icons/md";
 
 type InstructionsProps = {
   confirmedInstructions: string[];
@@ -14,11 +12,11 @@ type InstructionsProps = {
 };
 
 export default function Instructions({
-  confirmedInstructions,
+  // confirmedInstructions,
   setConfirmedInstructions,
 }: InstructionsProps) {
   const [instruction, setInstruction] = useState<string>("");
-  const [openForm, setOpenForm] = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
   const handleInstructionChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInstruction(e.target.value);
@@ -29,63 +27,50 @@ export default function Instructions({
     setConfirmedInstructions((prev) => [...prev, instruction]);
 
     setInstruction("");
-  };
-
-  const iconStyle = {
-    transform: openForm ? "rotate(180deg)" : "rotate(0deg)",
-    transition: "transform 0.3s",
+    setShowModal(false);
   };
 
   return (
     <>
-      <div>
-        <Button
-          onClick={() => setOpenForm(!openForm)}
-          aria-controls="instruction-form"
-          aria-expanded={openForm}
-          style={{ backgroundColor: "transparent", borderColor: "transparent" }}
-          title="instructions"
-        >
-          <BsChevronDown style={iconStyle} />
-        </Button>
-      </div>
+      <Button
+        onClick={() => setShowModal(true)}
+        title="instructions"
+        style={{backgroundColor: "transparent", border: "none"}}
+      >
+        <MdOutlineMessage />
+      </Button>
 
-      <Collapse in={openForm}>
-        <div id="collapse-form">
+      <Modal show={showModal} onHide={() => setShowModal(false)} centered>
+        <Modal.Header closeButton>
+          <Modal.Title>add instructions</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
           <Form onSubmit={handleConfirmedInstructions}>
-            <Row className="d-inline-flex align-items-center instruction-container">
-              <Col>
-                <Form.Group controlId="instructionInput">
-                  <Form.Control
-                    type="text"
-                    placeholder="instructions"
-                    value={instruction}
-                    onChange={handleInstructionChange}
-                    autoComplete="off"
-                    size="sm"
-                    style={{ backgroundColor: "transparent", borderColor: "transparent" }}
-                  />
-                </Form.Group>
-              </Col>
-              <Col md="auto">
-                <Button
-                  type="submit"
-                  onClick={handleConfirmedInstructions}
-                  disabled={!instruction.trim()}
-                  style={{
-                    backgroundColor: "transparent",
-                    borderColor: "transparent",
-                  }}
-                >
-                  <BsCheckLg />
-                </Button>
-              </Col>
-            </Row>
+            <Form.Group controlId="instructionInput">
+              <Form.Control
+                autoFocus
+                type="text"
+                placeholder="instructions"
+                value={instruction}
+                onChange={handleInstructionChange}
+                autoComplete="off"
+              />
+            </Form.Group>
           </Form>
-        </div>
-      </Collapse>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button
+            type="submit"
+            variant="glass"
+            onClick={handleConfirmedInstructions}
+            disabled={!instruction.trim()}
+          >
+            <BsCheckLg />
+          </Button>
+        </Modal.Footer>
+      </Modal>
 
-      <ListGroup className="d-inline-flex" style={{}}>
+      {/* <ListGroup className="d-inline-flex" style={{}}>
         {confirmedInstructions.map((instruction, index) => (
           <ListGroup.Item
             key={index}
@@ -95,7 +80,7 @@ export default function Instructions({
             {instruction}
           </ListGroup.Item>
         ))}
-      </ListGroup>
+      </ListGroup> */}
     </>
   );
 }
