@@ -42,7 +42,7 @@ export default function PreviousCalls({
                   className="d-flex circle align-items-center justify-content-center"
                   style={{
                     backgroundColor: bgColor,
-                    width: "max(10vw, 10vh)",
+                    width: "max(8vw, 8vh)",
                   }}
                 >
                   <div>{letter}</div>

@@ -282,6 +282,12 @@ background-color: var(--bingo-gray);
   font-weight: 500;
 }
 
+/* @-webkit-keyframes marquee {
+  from { transform: translateX(100%); }
+  to { transform: translateX(-100%); }
+} */
+
+
 @keyframes marquee {
   0% { transform: translateX(100%); }
   50% { transform: translateX(-100%); }
@@ -296,6 +302,7 @@ background-color: var(--bingo-gray);
   white-space: nowrap;
   overflow: hidden;
   animation: marquee 10s linear infinite;
+  /* -webkit-animation: marquee 10s linear infinite; */
 }
 
 .marquee-container {
