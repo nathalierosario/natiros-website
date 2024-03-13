@@ -292,7 +292,7 @@ background-color: var(--bingo-bg-color);
   white-space: nowrap;
   overflow: hidden;
   animation: marquee 10s linear infinite;
-  /* -webkit-animation: marquee 10s linear infinite; */
+  -webkit-animation: marquee 10s linear infinite;
 }
 
 .marquee-container {
