@@ -67,7 +67,6 @@ export default function GoldenEyeEnt() {
       <Nav
         ref={navbarRef}
         variant="underline"
-        // className="position-fixed top-0 w-100 align-items-center ge-nav-bar"
         className={`align-items-center justify-content-between px-4 ge-nav-bar ${
           key === "home" ? "position-fixed top-0 w-100" : "position-sticky bingo"
         }`}
@@ -78,7 +77,7 @@ export default function GoldenEyeEnt() {
 
         {/* Navbar logo */}
         <Nav.Item>
-          <Nav.Link disabled className="nav-logo pb-0">
+          <Nav.Link as={"h1"} disabled className="nav-logo my-0 py-0">
             GoldenEye Entertainment
           </Nav.Link>
         </Nav.Item>
@@ -95,7 +94,7 @@ export default function GoldenEyeEnt() {
 
 
         {/* Navbar Links */}
-        <div className="d-none d-md-flex">
+        <div className="d-none d-md-flex align-items-center">
           <Button
             title="toggle sound"
             variant="glass"
@@ -112,7 +111,7 @@ export default function GoldenEyeEnt() {
           >
             <MdOutlineTv />
           </Button>
-          <Nav.Item>
+          <Nav.Item className="px-3">
             <Nav.Link eventKey="home" onClick={() => setKey("home")}>
               home
             </Nav.Link>

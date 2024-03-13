@@ -6,10 +6,7 @@ type BingoBallProps = {
   onClick: () => void;
 };
 
-export default function BingoBall({
-  number,
-  onClick,
-}: BingoBallProps) {
+export default function BingoBall({ number, onClick }: BingoBallProps) {
   return (
     <Button
       className="circle bingo-ball"
@@ -17,11 +14,10 @@ export default function BingoBall({
       onClick={onClick}
     >
       {number > 0 ? (
-        <>
-          <div>{getLetterForNumber(number)}</div>
-          <div>{"-"}</div>
-          <div>{number}</div>
-        </>
+        <div className="bingo-ball-content">
+          <div style={{fontSize: "3vw"}}>{getLetterForNumber(number)}</div>
+          <div style={{fontSize: "2vw"}}>{number}</div>
+        </div>
       ) : (
         "start game"
       )}

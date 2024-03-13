@@ -2,7 +2,6 @@ import { useState } from "react";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import Button from "react-bootstrap/Button";
 import { BingoPattern } from "./BingoTypes";
 import { generateAvailableNumbers } from "./AvailableNums";
 import generateRandomNumber from "./NumberGenerator";
@@ -12,6 +11,7 @@ import DisplayBoard from "./DisplayBoard";
 import Instructions from "./Instructions";
 import PreviousCalls from "./PreviousCalls";
 import InstructionDisplay from "./InstructionDisplay";
+import ClearBoard from "./ClearBoard";
 // import { useLayout } from "./LayoutContext";
 
 export default function Bingo() {
@@ -104,17 +104,7 @@ export default function Bingo() {
               setConfirmedInstructions={setConfirmedInstructions}
             />
             <BingoBall number={currentBingo} onClick={getBingoNumber} />
-            <Button
-              size="sm"
-              variant="simple"
-              className="rounded"
-              style={{
-                borderColor: "transparent",
-              }}
-              onClick={resetBoard}
-            >
-              clear board
-            </Button>
+            <ClearBoard resetBoard={resetBoard} />
           </div>
         </Col>
 

@@ -30,7 +30,7 @@ export default function PreviousCalls({
     <div className="prev-calls-container">
       {patternConfirmed && (
         <>
-          <span>previous calls</span>
+          <span style={{fontSize: "1.5vw"}}>previous calls</span>
           <div className="d-flex justify-content-center align-items-center">
             {prevThreeCalled.map((number, index) => {
               const letter = getLetterForNumber(number);
@@ -42,12 +42,13 @@ export default function PreviousCalls({
                   className="d-flex circle align-items-center justify-content-center"
                   style={{
                     backgroundColor: bgColor,
-                    width: "max(8vw, 8vh)",
+                    width: "10vw",
                   }}
                 >
-                  <div>{letter}</div>
-                  <div>{"-"}</div>
-                  <div>{number}</div>
+                  <div className="prev-calls-content">
+                    <div className="pre-calls-letter" style={{fontSize: "3vw"}}>{letter}</div>
+                    <div className="prev-calls-num" style={{fontSize: "2vw"}}>{number}</div>
+                  </div>
                 </div>
               );
             })}
