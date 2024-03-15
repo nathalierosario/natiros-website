@@ -76,7 +76,7 @@ export default function Pattern({
                   pattern["BINGO".charAt(colIndex) as keyof BingoPattern][
                     rowIndex
                   ]
-                    ? "simple"
+                    ? "info"
                     : "outline-turq"
                 }
                 className={`circle pattern-cell border-0 ${

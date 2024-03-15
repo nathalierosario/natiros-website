@@ -219,7 +219,7 @@ body {
 }
 
 .modal-content {
-background-color: var(--bingo-bg-color);
+  background-color: var(--bingo-bg-color);
 }
 
 .display-letter {
@@ -273,15 +273,26 @@ background-color: var(--bingo-bg-color);
   font-weight: 500;
 }
 
-
 @keyframes marquee {
-  0% { transform: translateX(100%); }
-  50% { transform: translateX(-100%); }
-  100% { transform: translateX(100%); }
+  0% {
+    transform: translateX(100%);
+  }
+  50% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
 
-  0% { -webkit-transform: translateX(100%); }
-  50% { -webkit-transform: translateX(-100%); }
-  100% { -webkit-transform: translateX(100%); }
+  0% {
+    -webkit-transform: translateX(100%);
+  }
+  50% {
+    -webkit-transform: translateX(-100%);
+  }
+  100% {
+    -webkit-transform: translateX(100%);
+  }
 }
 
 .instruction-display {
@@ -303,4 +314,8 @@ background-color: var(--bingo-bg-color);
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.prev-calls-container {
+  font-family: "Jetbarins Mono", monospace;
 }
