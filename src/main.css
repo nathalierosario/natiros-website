@@ -8,7 +8,7 @@
   --bingo-bg-color: #1e1d1f;
   --bingo-text-color: #e5d0cc;
   --bingo-gray: #534d4d;
-  --glass: rgba(26, 26, 26, 0.3);
+  --glass: rgba(71, 70, 70, 0.3);
   --glass-hover: rgba(255, 255, 255, 0.3);
   --white: #eceae5;
 
@@ -45,7 +45,7 @@ body {
 }
 
 .ge-nav-bar {
-  background-color: rgba(0, 0, 0, 0.208);
+  background-color: rgba(0, 0, 0, 0.457);
   /* background-image: url(./components/GoldenEye/images/adultbingohomepage.png); */
   background-blend-mode: luminosity;
   backdrop-filter: blur(20px);
@@ -64,7 +64,7 @@ body {
 }
 
 .ge-nav-bar .nav-link.active {
-  color: var(--bingo-yellow);
+  color: var(--white);
   font-weight: 700;
 }
 
@@ -133,6 +133,8 @@ body {
   backdrop-filter: blur(30px);
   transition: all 0.25s linear;
 }
+
+
 
 .btn-glass:hover {
   background-color: var(--glass-hover);

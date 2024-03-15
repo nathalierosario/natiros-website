@@ -8,11 +8,13 @@ import Home from "./GoldenEye/Home";
 import backgroundImageHome from "./GoldenEye/images/adultbingohomepage.png";
 import { BsPauseFill, BsPlayFill, BsX } from "react-icons/bs";
 import { MdOutlineTv, MdMenu } from "react-icons/md";
+import DropdownMenu from "./GoldenEye/Dropdown";
 
 export default function GoldenEyeEnt() {
   const [key, setKey] = useState("home");
   const { togglePlay, playing } = usePlayer();
-  const playlistID = "PL1BxR11Ysr38El0FTUAraiFLxyYeHUhl6";
+  const defaultPlaylistID = "PL1BxR11Ysr38El0FTUAraiFLxyYeHUhl6";
+  const [playlistID, setPlaylistID] = useState(defaultPlaylistID);
   const [showVideo, setShowVideo] = useState(false);
 
   const navbarRef = useRef<HTMLDivElement>(null);
@@ -34,8 +36,15 @@ export default function GoldenEyeEnt() {
   return (
     <>
       {/* Sidebar contents for smaller screens */}
-      <div className={`d-flex flex-column align-items-center sidebar ${isSidebarVisible ? "show" : ""}`}>
-        <Button variant="glass circle" onClick={() => setIsSidebarVisible(false)}>
+      <div
+        className={`d-flex flex-column align-items-center sidebar ${
+          isSidebarVisible ? "show" : ""
+        }`}
+      >
+        <Button
+          variant="glass circle"
+          onClick={() => setIsSidebarVisible(false)}
+        >
           <BsX />
         </Button>
         <Nav.Link eventKey="home" onClick={() => setKey("home")}>
@@ -62,27 +71,25 @@ export default function GoldenEyeEnt() {
         </Button>
       </div>
 
-
-      {/* Navbar */}
+      {/* Navbar shown on larger screens*/}
       <Nav
         ref={navbarRef}
         variant="underline"
         className={`align-items-center justify-content-between px-4 ge-nav-bar ${
-          key === "home" ? "position-fixed top-0 w-100" : "position-sticky bingo"
+          key === "home"
+            ? "position-fixed top-0 w-100"
+            : "position-sticky bingo"
         }`}
         activeKey={key}
         onSelect={(selectedKey) => setKey(selectedKey || "bingo")}
       >
-        
-
         {/* Navbar logo */}
         <Nav.Item>
           <Nav.Link as={"h1"} disabled className="nav-logo my-0 py-0">
             GoldenEye Entertainment
           </Nav.Link>
         </Nav.Item>
-        
-        
+
         {/* Sidebar button to toggle on smaller screens */}
         <Button
           variant="glass circle"
@@ -91,7 +98,6 @@ export default function GoldenEyeEnt() {
         >
           <MdMenu />
         </Button>
-
 
         {/* Navbar Links */}
         <div className="d-none d-md-flex align-items-center">
@@ -116,10 +122,13 @@ export default function GoldenEyeEnt() {
               home
             </Nav.Link>
           </Nav.Item>
-          <Nav.Item>
+          <Nav.Item className="pe-3">
             <Nav.Link eventKey="bingo" onClick={() => setKey("bingo")}>
               bingo
             </Nav.Link>
+          </Nav.Item>
+          <Nav.Item>
+            <DropdownMenu setPlaylistID={setPlaylistID} />
           </Nav.Item>
         </div>
       </Nav>
