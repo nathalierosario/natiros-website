@@ -32,6 +32,7 @@ const YoutubePlayer: React.FC<{ playlistID: string }> = ({ playlistID }) => {
           playerVars: {
             listType: "playlist",
             list: playlistID,
+            autoplay: 0,
           },
           events: {
             onReady: (event) => {
