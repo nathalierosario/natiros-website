@@ -9,7 +9,8 @@
   --bingo-text-color: #e5d0cc;
   --bingo-gray: #534d4d;
   --glass: rgba(71, 70, 70, 0.3);
-  --glass-hover: rgba(255, 255, 255, 0.3);
+  --glass-hover: rgba(163, 163, 163, 0.3);
+  --dark-glass: rgba(0, 0, 0, 0.5);
   --white: #eceae5;
 
   background-color: var(--bingo-bg-color);
@@ -45,27 +46,33 @@ body {
 }
 
 .ge-nav-bar {
-  background-color: rgba(0, 0, 0, 0.457);
-  /* background-image: url(./components/GoldenEye/images/adultbingohomepage.png); */
-  background-blend-mode: luminosity;
-  backdrop-filter: blur(20px);
-
-  -webkit-backdrop-filter: blur(20px);
   --bs-nav-link-color: var(--white);
   --bs-nav-link-hover-color: var(--white);
 }
 
 .nav-logo.disabled {
   font-family: "Dollie Script Personal Use", sans-serif;
-  font-size: 3vw;
+  font-size: 3rem;
   color: var(--bingo-blue);
   letter-spacing: 0.12vw;
   border-bottom: none;
 }
 
+@media (max-width: 768px) {
+  .nav-logo.disabled {
+    font-size: 2.7rem;
+  }
+}
+
 .ge-nav-bar .nav-link.active {
   color: var(--white);
   font-weight: 700;
+}
+
+.navbar-linkz {
+  -webkit-backdrop-filter: blur(30px);
+  backdrop-filter: blur(30px);
+  background-color: var(--dark-glass);
 }
 
 .circle.yt-nav-btn {
@@ -87,8 +94,9 @@ body {
   top: 0;
   height: 100%;
   width: 20vw;
-  background-blend-mode: luminosity;
-  backdrop-filter: blur(30px);
+  /* background-blend-mode: luminosity; */
+  -webkit-backdrop-filter: blur(30px) grayscale(100%) brightness(0.8);
+  backdrop-filter: blur(30px) grayscale(100%) brightness(0.8);
   transition: right 0.3s ease;
   z-index: 2;
 }
@@ -126,20 +134,18 @@ body {
 }
 
 .btn-glass {
-  /* background: rgba(225, 134, 229, 0.5); */
   background-color: var(--glass);
   color: var(--white);
-  background-blend-mode: luminosity;
+  /* background-blend-mode: luminosity; */
+  -webkit-backdrop-filter: blur(30px);
   backdrop-filter: blur(30px);
   transition: all 0.25s linear;
 }
 
-
-
 .btn-glass:hover {
   background-color: var(--glass-hover);
   color: var(--white);
-  background-blend-mode: luminosity;
+  -webkit-backdrop-filter: blur(30px);
   backdrop-filter: blur(30px);
   transition: all 0.25s linear;
 }

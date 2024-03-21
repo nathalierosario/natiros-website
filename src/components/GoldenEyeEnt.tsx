@@ -1,6 +1,6 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { usePlayer } from "./GoldenEye/PlayerContext";
-import { useLayout } from "./GoldenEye/LayoutContext";
+// import { useLayout } from "./GoldenEye/LayoutContext";
 import Nav from "react-bootstrap/Nav";
 import Button from "react-bootstrap/Button";
 import Bingo from "./GoldenEye/Bingo";
@@ -8,7 +8,7 @@ import Home from "./GoldenEye/Home";
 import backgroundImageHome from "./GoldenEye/images/adultbingohomepage.png";
 import { BsPauseFill, BsPlayFill, BsX } from "react-icons/bs";
 import { MdOutlineTv, MdMenu } from "react-icons/md";
-import DropdownMenu from "./GoldenEye/Dropdown";
+import DropdownMenu from "./GoldenEye/DropdownMenu";
 
 export default function GoldenEyeEnt() {
   const [key, setKey] = useState("home");
@@ -16,33 +16,49 @@ export default function GoldenEyeEnt() {
   const defaultPlaylistID = "PL1BxR11Ysr38El0FTUAraiFLxyYeHUhl6";
   const [playlistID, setPlaylistID] = useState(defaultPlaylistID);
   const [showVideo, setShowVideo] = useState(false);
+  const [isSidebarVisible, setIsSidebarVisible] = useState(false);
 
-  const navbarRef = useRef<HTMLDivElement>(null);
-  const { setNavbarHeight } = useLayout();
+  // const navbarRef = useRef<HTMLDivElement>(null);
+  // const { setNavbarHeight } = useLayout();
 
-  useEffect(() => {
-    if (navbarRef.current) {
-      setNavbarHeight(navbarRef.current.clientHeight);
-    }
-  }, [setNavbarHeight]);
+  // useEffect(() => {
+  //   if (navbarRef.current) {
+  //     setNavbarHeight(navbarRef.current.clientHeight);
+  //   }
+  // }, [setNavbarHeight]);
 
   const showVideoOnHome = () => {
     setShowVideo(!showVideo);
     setKey("home");
   };
 
-  const [isSidebarVisible, setIsSidebarVisible] = useState(false);
+  useEffect(() => {
+    const handleResize = () => {
+      const desktopBreakpoint = 768;
+
+      if (window.innerWidth >= desktopBreakpoint) {
+        setIsSidebarVisible(false);
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    handleResize();
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   return (
     <>
       {/* Sidebar contents for smaller screens */}
       <div
+        style={{ fontSize: "8vw" }}
         className={`d-flex flex-column align-items-center sidebar ${
           isSidebarVisible ? "show" : ""
         }`}
       >
         <Button
-          variant="glass circle"
+          variant="glass circle mb-5"
           onClick={() => setIsSidebarVisible(false)}
         >
           <BsX />
@@ -53,27 +69,29 @@ export default function GoldenEyeEnt() {
         <Nav.Link eventKey="bingo" onClick={() => setKey("bingo")}>
           bingo
         </Nav.Link>
-        <Button
-          title="toggle sound"
-          variant="glass"
-          className="circle yt-nav-btn"
-          onClick={togglePlay}
-        >
-          {!playing ? <BsPlayFill /> : <BsPauseFill />}
-        </Button>
-        <Button
-          title="show video"
-          variant="glass"
-          className="circle yt-nav-btn"
-          onClick={showVideoOnHome}
-        >
-          <MdOutlineTv />
-        </Button>
+        <div className="d-flex">
+          <Button
+            title="toggle sound"
+            variant="glass"
+            className="circle yt-nav-btn"
+            onClick={togglePlay}
+          >
+            {!playing ? <BsPlayFill /> : <BsPauseFill />}
+          </Button>
+          <Button
+            title="show video"
+            variant="glass"
+            className="circle yt-nav-btn"
+            onClick={showVideoOnHome}
+          >
+            <MdOutlineTv />
+          </Button>
+        </div>
       </div>
 
       {/* Navbar shown on larger screens*/}
       <Nav
-        ref={navbarRef}
+        // ref={navbarRef}
         variant="underline"
         className={`align-items-center justify-content-between px-4 ge-nav-bar ${
           key === "home"
@@ -90,7 +108,7 @@ export default function GoldenEyeEnt() {
           </Nav.Link>
         </Nav.Item>
 
-        {/* Sidebar button to toggle on smaller screens */}
+        {/* Sidebar menu button to toggle on smaller screens */}
         <Button
           variant="glass circle"
           className="sidebar-toggle d-md-none"
@@ -100,7 +118,7 @@ export default function GoldenEyeEnt() {
         </Button>
 
         {/* Navbar Links */}
-        <div className="d-none d-md-flex align-items-center">
+        <div className="navbar-linkz rounded-pill p-2 d-none d-md-flex align-items-center">
           <Button
             title="toggle sound"
             variant="glass"
@@ -128,7 +146,10 @@ export default function GoldenEyeEnt() {
             </Nav.Link>
           </Nav.Item>
           <Nav.Item>
-            <DropdownMenu setPlaylistID={setPlaylistID} />
+            <DropdownMenu
+              playlistID={playlistID}
+              setPlaylistID={setPlaylistID}
+            />
           </Nav.Item>
         </div>
       </Nav>
