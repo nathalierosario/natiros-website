@@ -119,6 +119,7 @@ body {
   overflow-x: hidden;
   overflow-y: auto;
   background-color: rgba(0, 0, 0, 0.3);
+  -webkit-backdrop-filter: blur(50px);
   backdrop-filter: blur(50px);
   display: flex;
   justify-content: center;
@@ -291,16 +292,6 @@ body {
   100% {
     transform: translateX(100%);
   }
-
-  0% {
-    -webkit-transform: translateX(100%);
-  }
-  50% {
-    -webkit-transform: translateX(-100%);
-  }
-  100% {
-    -webkit-transform: translateX(100%);
-  }
 }
 
 .instruction-display {
@@ -311,7 +302,6 @@ body {
   white-space: nowrap;
   overflow: hidden;
   animation: marquee 10s linear infinite;
-  -webkit-animation: marquee 10s linear infinite;
 }
 
 .marquee-container {

@@ -37,7 +37,7 @@ export default function GEHome({
           onClick={handleClose}
           style={{ width: "3%" }}
         >
-          <BsX size={"2rem"} />
+          <BsX size={32} />
         </Button>
       </div>
     </div>
