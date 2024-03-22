@@ -28,6 +28,18 @@ export default function Instructions({
 
     setInstruction("");
     setShowModal(false);
+
+    const marqueeInstructions = document.querySelector(
+      ".instruction-display"
+    ) as HTMLElement | null;
+
+    if (marqueeInstructions) {
+      marqueeInstructions.style.animation = "none";
+
+      void marqueeInstructions.offsetHeight;
+
+      marqueeInstructions.style.animation = "";
+    }
   };
 
   return (
@@ -35,7 +47,7 @@ export default function Instructions({
       <Button
         onClick={() => setShowModal(true)}
         title="instructions"
-        style={{backgroundColor: "transparent", border: "none"}}
+        style={{ backgroundColor: "transparent", border: "none" }}
       >
         <MdOutlineMessage />
       </Button>
