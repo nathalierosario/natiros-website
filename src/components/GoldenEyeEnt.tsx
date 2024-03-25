@@ -12,23 +12,13 @@ import DropdownMenu from "./GoldenEye/DropdownMenu";
 
 export default function GoldenEyeEnt() {
   const [key, setKey] = useState("home");
-  const { togglePlay, playing } = usePlayer();
+  const { playing, togglePlay, toggleShowVideo } = usePlayer();
   const defaultPlaylistID = "PL1BxR11Ysr38El0FTUAraiFLxyYeHUhl6";
   const [playlistID, setPlaylistID] = useState(defaultPlaylistID);
-  const [showVideo, setShowVideo] = useState(false);
   const [isSidebarVisible, setIsSidebarVisible] = useState(false);
 
-  // const navbarRef = useRef<HTMLDivElement>(null);
-  // const { setNavbarHeight } = useLayout();
-
-  // useEffect(() => {
-  //   if (navbarRef.current) {
-  //     setNavbarHeight(navbarRef.current.clientHeight);
-  //   }
-  // }, [setNavbarHeight]);
-
   const showVideoOnHome = () => {
-    setShowVideo(!showVideo);
+    toggleShowVideo();
     setKey("home");
   };
 
@@ -168,11 +158,7 @@ export default function GoldenEyeEnt() {
           minHeight: "100vh",
         }}
       >
-        <Home
-          playlistID={playlistID}
-          showVideo={showVideo}
-          setShowVideo={setShowVideo}
-        />
+        <Home playlistID={playlistID} />
       </div>
     </>
   );

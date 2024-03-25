@@ -8,8 +8,13 @@ declare global {
 }
 
 const YoutubePlayer: React.FC<{ playlistID: string }> = ({ playlistID }) => {
-  const { playing } = usePlayer();
+  const { playing, togglePlay, showVideo } = usePlayer();
   const playerRef = useRef<any>(null);
+  const playingRef = useRef(playing);
+
+  useEffect(() => {
+    playingRef.current = playing;
+  }, [playing]);
 
   useEffect(() => {
     const scriptId = "youtube-iframe-api";
@@ -26,6 +31,18 @@ const YoutubePlayer: React.FC<{ playlistID: string }> = ({ playlistID }) => {
       }
     };
 
+    const onPlayerStateChange = (event: any) => {
+      switch (event.data) {
+        case window.YT.PlayerState.PLAYING:
+          if (!playingRef.current) togglePlay();
+          break;
+        case window.YT.PlayerState.PAUSED:
+        case window.YT.PlayerState.ENDED:
+          if (playingRef.current) togglePlay();
+          break;
+      }
+    };
+
     const initializePlayer = () => {
       if (window.YT && window.YT.Player) {
         playerRef.current = new window.YT.Player("player", {
@@ -39,6 +56,7 @@ const YoutubePlayer: React.FC<{ playlistID: string }> = ({ playlistID }) => {
               event.target.setShuffle(true);
               event.target.playVideoAt(0);
             },
+            onStateChange: onPlayerStateChange,
           },
         });
       }
@@ -54,7 +72,6 @@ const YoutubePlayer: React.FC<{ playlistID: string }> = ({ playlistID }) => {
     return () => {
       if (playerRef.current) {
         playerRef.current.destroy();
-        // playerRef.current = null;
       }
       window.onYouTubeIframeAPIReady = () => {};
     };
@@ -68,7 +85,10 @@ const YoutubePlayer: React.FC<{ playlistID: string }> = ({ playlistID }) => {
 
   return (
     <div className="d-flex justify-content-center">
-      <div className=" ratio ratio-16x9" style={{ width: "95%" }}>
+      <div
+        className=" ratio ratio-16x9"
+        style={{ width: "50%", display: showVideo ? "block" : "none" }}
+      >
         <div id="player"></div>
       </div>
     </div>
