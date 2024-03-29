@@ -362,7 +362,7 @@ body {
   display: flex;
   justify-content: center;
   background-color: var(--bingo-turq);
-  z-index: 20;
+  z-index: 9;
 }
 
 #play-controls-popover {
