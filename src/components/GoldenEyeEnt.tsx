@@ -8,7 +8,6 @@ import Home from "./GoldenEye/Home";
 import backgroundImageHome from "./GoldenEye/images/adultbingohomepage.png";
 import { BsPauseFill, BsPlayFill, BsX } from "react-icons/bs";
 import { MdOutlineTv, MdMenu } from "react-icons/md";
-import DropdownMenu from "./GoldenEye/ChangePlaylist";
 import Extras from "./GoldenEye/Extras";
 import PlayControls from "./GoldenEye/PlayControls";
 
