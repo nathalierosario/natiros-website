@@ -12,6 +12,7 @@
   --glass-hover: rgba(163, 163, 163, 0.3);
   --dark-glass: rgba(0, 0, 0, 0.5);
   --white: #eceae5;
+  --orange: #f83406;
 
   background-color: var(--bingo-bg-color);
   color: var(--white);
@@ -45,9 +46,37 @@ body {
   padding-top: 100%;
 }
 
-.ge-nav-bar {
-  --bs-nav-link-color: var(--white);
-  --bs-nav-link-hover-color: var(--white);
+.nav-link {
+  position: relative;
+  display: inline-block;
+  color: #fff;
+  padding: 0.2rem;
+  margin: 0.5rem;
+}
+
+.nav-link.active:hover,
+.nav-link:hover,
+.nav-link.active {
+  color: var(--white);
+}
+
+.nav-link.active::before,
+.nav-link::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #fff;
+  transform: scaleX(0);
+  transition: transform 0.3s ease-in-out;
+  transform-origin: left center;
+}
+
+.nav-link.active::before,
+.nav-link:hover::before {
+  transform: scaleX(1);
 }
 
 .nav-logo.disabled {
@@ -64,15 +93,11 @@ body {
   }
 }
 
-.ge-nav-bar .nav-link.active {
-  color: var(--white);
-  font-weight: 700;
-}
-
 .navbar-linkz {
   -webkit-backdrop-filter: blur(30px);
   backdrop-filter: blur(30px);
   background-color: var(--dark-glass);
+  padding: 0.5rem 1.2rem;
 }
 
 .circle.yt-nav-btn {
@@ -104,34 +129,6 @@ body {
 .sidebar.show {
   right: 0;
   width: 100%;
-}
-
-.modal-dupe {
-  display: none;
-  opacity: 0;
-  transition: opacity 0.3s ease, visibility 0s linear 0.3s;
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 1055;
-  width: 100%;
-  height: 100%;
-  overflow-x: hidden;
-  overflow-y: auto;
-  background-color: rgba(0, 0, 0, 0.3);
-  -webkit-backdrop-filter: blur(50px);
-  backdrop-filter: blur(50px);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  visibility: hidden;
-}
-
-.modal-dupe.active {
-  display: flex;
-  opacity: 1;
-  visibility: visible;
-  transition: opacity 0.3s ease;
 }
 
 .btn-glass {
@@ -316,4 +313,96 @@ body {
 
 .prev-calls-container {
   font-family: "Jetbarins Mono", monospace;
+}
+
+.video-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+}
+
+.youtube-player {
+  width: 98%;
+  z-index: 11;
+}
+
+.extras-tab {
+  background-image: url(./components/GoldenEye/images/adultbingoblur.png);
+  background-size: cover;
+  background-position: center;
+  min-height: 100vh;
+}
+
+.carousel-div {
+  max-width: 90%;
+  margin: auto;
+}
+
+.carousel-div .carousel-item img {
+  object-fit: contain;
+  max-height: 80vh;
+}
+
+.upload-img-btn {
+  background-color: var(--dark-glass);
+}
+
+.play-controls {
+  position: fixed;
+  bottom: 5%;
+  left: 2%;
+  display: flex;
+  justify-content: center;
+  background-color: var(--bingo-turq);
+  z-index: 20;
+}
+
+#play-controls-popover {
+  background-color: var(--dark-glass);
+  -webkit-backdrop-filter: blur(30px);
+  backdrop-filter: blur(30px);
+}
+
+.bs-popover-top > .popover-arrow::before,
+.bs-popover-top > .popover-arrow::after {
+  border-top-color: var(--bingo-bg-color);
+}
+
+.pop-options-list {
+  display: flex;
+  flex-direction: column;
+  font-family: "Roboto Mono", monospace;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--white);
+}
+
+.pop-option {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.pop-buttons {
+  flex-grow: 1;
+  margin-right: 10px;
+}
+
+.pop-arrow {
+  margin-left: auto;
+  transform: translateX(100%);
+  transition: transform 0.3s ease-in-out;
+}
+
+.pop-option:hover .pop-arrow {
+  transform: translateX(0);
 }

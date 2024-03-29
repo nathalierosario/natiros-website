@@ -1,16 +1,14 @@
 import React, { useState } from "react";
-import Dropdown from "react-bootstrap/Dropdown";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
-import { MdMenu } from "react-icons/md";
 
 type DropdownMenuProps = {
   playlistID: string;
   setPlaylistID: React.Dispatch<React.SetStateAction<string>>;
 };
 
-export default function DropdownMenu({
+export default function ChangePlaylist({
   playlistID,
   setPlaylistID,
 }: DropdownMenuProps) {
@@ -58,26 +56,29 @@ export default function DropdownMenu({
 
   const toggleModal = () => setShowModal(!showModal);
 
+  const handleModalClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    e.stopPropagation();
+  };
+
   return (
     <>
-      <Dropdown>
-        <Dropdown.Toggle variant="glass" className="circle">
-          <MdMenu />
-        </Dropdown.Toggle>
+      <div className="pop-buttons" onClick={toggleModal}>
+        change playlist
+      </div>
 
-        <Dropdown.Menu variant="dark">
-          <Dropdown.Item onClick={toggleModal}>change playlist</Dropdown.Item>
-        </Dropdown.Menu>
-      </Dropdown>
-
-      <Modal show={showModal} onHide={handleModalClose} centered>
+      <Modal
+        show={showModal}
+        onHide={handleModalClose}
+        onClick={handleModalClick}
+        centered
+      >
         <Modal.Header className="text-center" closeButton></Modal.Header>
         <Modal.Body className="text-center">
           <Form onSubmit={handleSubmit}>
             <Form.Group controlId="youtubePlaylistInput">
               <Form.Control
                 type="text"
-                placeholder="Enter YouTube playlist URL"
+                placeholder="enter YouTube playlist URL"
                 value={youtubeURL}
                 onChange={handleURLChange}
                 isInvalid={!!errorMsg}

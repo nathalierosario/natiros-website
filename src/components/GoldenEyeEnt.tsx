@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { usePlayer } from "./GoldenEye/PlayerContext";
-// import { useLayout } from "./GoldenEye/LayoutContext";
+import { useLayout } from "./GoldenEye/LayoutContext";
 import Nav from "react-bootstrap/Nav";
 import Button from "react-bootstrap/Button";
 import Bingo from "./GoldenEye/Bingo";
@@ -8,7 +8,9 @@ import Home from "./GoldenEye/Home";
 import backgroundImageHome from "./GoldenEye/images/adultbingohomepage.png";
 import { BsPauseFill, BsPlayFill, BsX } from "react-icons/bs";
 import { MdOutlineTv, MdMenu } from "react-icons/md";
-import DropdownMenu from "./GoldenEye/DropdownMenu";
+import DropdownMenu from "./GoldenEye/ChangePlaylist";
+import Extras from "./GoldenEye/Extras";
+import PlayControls from "./GoldenEye/PlayControls";
 
 export default function GoldenEyeEnt() {
   const [key, setKey] = useState("home");
@@ -16,6 +18,22 @@ export default function GoldenEyeEnt() {
   const defaultPlaylistID = "PL1BxR11Ysr38El0FTUAraiFLxyYeHUhl6";
   const [playlistID, setPlaylistID] = useState(defaultPlaylistID);
   const [isSidebarVisible, setIsSidebarVisible] = useState(false);
+
+  const { setNavbarHeight } = useLayout();
+  const navbarRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const updateNavbarHeight = () => {
+      if (navbarRef.current) {
+        setNavbarHeight(navbarRef.current.clientHeight);
+      }
+    };
+
+    updateNavbarHeight();
+    window.addEventListener("resize", updateNavbarHeight);
+
+    return () => window.removeEventListener("resize", updateNavbarHeight);
+  }, [setNavbarHeight]);
 
   const showVideoOnHome = () => {
     toggleShowVideo();
@@ -81,12 +99,9 @@ export default function GoldenEyeEnt() {
 
       {/* Navbar shown on larger screens*/}
       <Nav
-        // ref={navbarRef}
-        variant="underline"
+        ref={navbarRef}
         className={`align-items-center justify-content-between px-4 ge-nav-bar ${
-          key === "home"
-            ? "position-fixed top-0 w-100"
-            : "position-sticky bingo"
+          key !== "bingo" ? "position-fixed top-0 w-100" : "position-sticky"
         }`}
         activeKey={key}
         onSelect={(selectedKey) => setKey(selectedKey || "bingo")}
@@ -108,38 +123,21 @@ export default function GoldenEyeEnt() {
         </Button>
 
         {/* Navbar Links */}
-        <div className="navbar-linkz rounded-pill p-2 d-none d-md-flex align-items-center">
-          <Button
-            title="toggle sound"
-            variant="glass"
-            className="circle yt-nav-btn"
-            onClick={togglePlay}
-          >
-            {!playing ? <BsPlayFill /> : <BsPauseFill />}
-          </Button>
-          <Button
-            title="show video"
-            variant="glass"
-            className="circle yt-nav-btn"
-            onClick={showVideoOnHome}
-          >
-            <MdOutlineTv />
-          </Button>
-          <Nav.Item className="px-3">
+        <div className="navbar-linkz rounded-pill d-none d-md-flex align-items-center">
+          <Nav.Item>
             <Nav.Link eventKey="home" onClick={() => setKey("home")}>
               home
             </Nav.Link>
           </Nav.Item>
-          <Nav.Item className="pe-3">
+          <Nav.Item>
             <Nav.Link eventKey="bingo" onClick={() => setKey("bingo")}>
               bingo
             </Nav.Link>
           </Nav.Item>
           <Nav.Item>
-            <DropdownMenu
-              playlistID={playlistID}
-              setPlaylistID={setPlaylistID}
-            />
+            <Nav.Link eventKey="extras" onClick={() => setKey("extras")}>
+              extras
+            </Nav.Link>
           </Nav.Item>
         </div>
       </Nav>
@@ -160,6 +158,20 @@ export default function GoldenEyeEnt() {
       >
         <Home playlistID={playlistID} />
       </div>
+
+      <div
+        className={`tab-content extras-tab ${
+          key === "extras" ? "d-block" : "d-none"
+        }`}
+      >
+        <Extras />
+      </div>
+
+      <PlayControls
+        showVideoOnHome={showVideoOnHome}
+        playlistID={playlistID}
+        setPlaylistID={setPlaylistID}
+      />
     </>
   );
 }

@@ -8,7 +8,7 @@ declare global {
 }
 
 const YoutubePlayer: React.FC<{ playlistID: string }> = ({ playlistID }) => {
-  const { playing, togglePlay, showVideo } = usePlayer();
+  const { playing, togglePlay, showVideo, toggleShowVideo } = usePlayer();
   const playerRef = useRef<any>(null);
   const playingRef = useRef(playing);
 
@@ -84,10 +84,14 @@ const YoutubePlayer: React.FC<{ playlistID: string }> = ({ playlistID }) => {
   }, [playing]);
 
   return (
-    <div className="d-flex justify-content-center">
+    <div
+      className="video-overlay"
+      onClick={toggleShowVideo}
+      style={{ display: showVideo ? "" : "none" }}
+    >
       <div
-        className=" ratio ratio-16x9"
-        style={{ width: "50%", display: showVideo ? "block" : "none" }}
+        className="youtube-player ratio ratio-16x9"
+        onClick={(event) => event.stopPropagation()}
       >
         <div id="player"></div>
       </div>
